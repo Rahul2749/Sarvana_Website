@@ -148,6 +148,16 @@ const Hero = () => {
         <div className="floating-item element-coffee" ref={el => floatingRefs.current[1] = el}>
           <div className="floating-inner" ref={el => floatingInnerRefs.current[1] = el}>
             <svg viewBox="0 0 100 100" className="floating-svg">
+              <defs>
+                <linearGradient id="coffeeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#4A2E1C" />
+                  <stop offset="100%" stopColor="#1A0F0A" />
+                </linearGradient>
+                <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#D9B44A" />
+                  <stop offset="100%" stopColor="#C8943E" />
+                </linearGradient>
+              </defs>
               <ellipse cx="50" cy="50" rx="30" ry="40" fill="url(#coffeeGrad)" transform="rotate(-15 50 50)" />
               <path d="M 50 10 Q 38 32 50 50 T 50 90" fill="none" stroke="url(#goldGrad)" strokeWidth="3.5" strokeLinecap="round" />
             </svg>
@@ -156,6 +166,16 @@ const Hero = () => {
         <div className="floating-item element-leaf" ref={el => floatingRefs.current[2] = el}>
           <div className="floating-inner" ref={el => floatingInnerRefs.current[2] = el}>
             <svg viewBox="0 0 100 100" className="floating-svg">
+              <defs>
+                <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#2D5016" />
+                  <stop offset="100%" stopColor="#1E330F" />
+                </linearGradient>
+                <linearGradient id="veinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#D9B44A" stopOpacity="0.8" />
+                  <stop offset="100%" stopColor="#C8943E" stopOpacity="0.4" />
+                </linearGradient>
+              </defs>
               <path d="M50,15 C72,38 72,68 50,85 C28,68 28,38 50,15 Z" fill="url(#leafGrad)" transform="rotate(25 50 50)" />
               <path d="M50,15 L50,85" stroke="url(#veinGrad)" strokeWidth="2.5" fill="none" />
               <path d="M50,35 Q60,30 65,25 M50,45 Q62,40 67,33 M50,55 Q62,50 67,43 M50,35 Q40,30 35,25 M50,45 Q38,40 33,33 M50,55 Q38,50 33,43" fill="none" stroke="url(#veinGrad)" strokeWidth="1.2" />
@@ -165,38 +185,18 @@ const Hero = () => {
         <div className="floating-item element-cardamom" ref={el => floatingRefs.current[3] = el}>
           <div className="floating-inner" ref={el => floatingInnerRefs.current[3] = el}>
             <svg viewBox="0 0 100 100" className="floating-svg">
+              <defs>
+                <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stopColor="#5E7A3E" />
+                  <stop offset="100%" stopColor="#3F522A" />
+                </linearGradient>
+              </defs>
               <path d="M50,15 C68,28 68,72 50,85 C32,72 32,28 50,15 Z" fill="url(#cardGrad)" transform="rotate(-30 50 50)" />
               <path d="M50,15 Q58,45 50,85 M50,15 Q42,45 50,85" fill="none" stroke="rgba(200, 148, 62, 0.4)" strokeWidth="2" />
             </svg>
           </div>
         </div>
       </div>
-
-      {/* Global Gradients for SVG elements so we don't repeat defs */}
-      <svg className="svg-defs" style={{ position: 'absolute', width: 0, height: 0, pointerEvents: 'none' }}>
-        <defs>
-          <linearGradient id="coffeeGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#4A2E1C" />
-            <stop offset="100%" stopColor="#1A0F0A" />
-          </linearGradient>
-          <linearGradient id="goldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#D9B44A" />
-            <stop offset="100%" stopColor="#C8943E" />
-          </linearGradient>
-          <linearGradient id="leafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#2D5016" />
-            <stop offset="100%" stopColor="#1E330F" />
-          </linearGradient>
-          <linearGradient id="veinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#D9B44A" stopOpacity="0.8" />
-            <stop offset="100%" stopColor="#C8943E" stopOpacity="0.4" />
-          </linearGradient>
-          <linearGradient id="cardGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" stopColor="#5E7A3E" />
-            <stop offset="100%" stopColor="#3F522A" />
-          </linearGradient>
-        </defs>
-      </svg>
       
       <div ref={contentRef} className="container hero-content">
         <div ref={logoRef} className="hero-logo-container">

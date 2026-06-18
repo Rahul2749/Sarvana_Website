@@ -80,7 +80,21 @@ const Benefits = () => {
     <section ref={containerRef} className="section benefits">
       {/* Decorative background items */}
       <div className="section-decor decor-left floating-leaf" ref={leafRef}>
-        <img src="/images/decor/decor-masala-chai.png" alt="Masala Chai" className="floating-img-decor" />
+        <svg viewBox="0 0 100 100" className="floating-svg-decor">
+          <defs>
+            <linearGradient id="benefitLeafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#2D5016" />
+              <stop offset="100%" stopColor="#1E330F" />
+            </linearGradient>
+            <linearGradient id="benefitVeinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stopColor="#D9B44A" stopOpacity="0.8" />
+              <stop offset="100%" stopColor="#C8943E" stopOpacity="0.4" />
+            </linearGradient>
+          </defs>
+          <path d="M50,15 C72,38 72,68 50,85 C28,68 28,38 50,15 Z" fill="url(#benefitLeafGrad)" transform="rotate(25 50 50)" />
+          <path d="M50,15 L50,85" stroke="url(#benefitVeinGrad)" strokeWidth="2.5" fill="none" />
+          <path d="M50,35 Q60,30 65,25 M50,45 Q62,40 67,33 M50,55 Q62,50 67,43 M50,35 Q40,30 35,25 M50,45 Q38,40 33,33 M50,55 Q38,50 33,43" fill="none" stroke="url(#benefitVeinGrad)" strokeWidth="1.2" />
+        </svg>
       </div>
       <div className="section-decor decor-right floating-jaggery" ref={jaggeryRef}>
         <img src="/images/hero/item-jaggery.png" alt="Jaggery" className="floating-img-decor" />

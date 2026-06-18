@@ -15,5 +15,5 @@
 
 /* Base image placeholders for missing generated images */
 img {
-  background-color: var(--color-surface-dark);
+  /* removed background color to restore transparency to PNGs */
 }
