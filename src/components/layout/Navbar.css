@@ -178,7 +178,7 @@
 .hamburger span {
   display: block;
   position: absolute;
-  height: 2px;
+  height: 1.5px;
   width: 100%;
   background-color: var(--color-accent);
   border-radius: var(--radius-full);
@@ -230,14 +230,14 @@
   right: 0;
   width: 100%;
   height: 100vh;
-  background: linear-gradient(135deg, rgba(26, 15, 10, 0.97) 0%, rgba(53, 31, 19, 0.99) 100%);
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
+  background: rgba(26, 15, 10, 0.98);
+  backdrop-filter: blur(40px);
+  -webkit-backdrop-filter: blur(40px);
   z-index: var(--z-modal);
   display: flex;
   align-items: center;
   justify-content: center;
-  border-left: 1px solid rgba(217, 180, 74, 0.15);
+  border-left: 1px solid rgba(255, 255, 255, 0.05);
   overflow: hidden;
 }
 
@@ -261,9 +261,10 @@
 
 .mobile-link {
   font-family: var(--font-display);
-  font-size: var(--text-3xl);
+  font-size: clamp(2rem, 8vw, var(--text-3xl));
   color: var(--color-text-light);
-  font-weight: 600;
+  font-weight: 400;
+  letter-spacing: 1px;
   transition: color var(--transition-fast), transform var(--transition-fast);
   display: inline-block;
   position: relative;
