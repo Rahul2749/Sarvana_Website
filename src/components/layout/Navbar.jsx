@@ -1,8 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { NavLink } from 'react-router-dom';
-import { useGSAP } from '@gsap/react';
 import { motion, AnimatePresence } from 'framer-motion';
-import gsap from 'gsap';
 import { useScrollDirection } from '../../hooks/useScrollDirection';
 import { navigationLinks } from '../../data/navigation';
 import Button from '../ui/Button';
@@ -22,16 +20,6 @@ const Navbar = () => {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
-
-  useGSAP(() => {
-    gsap.from(navRef.current, {
-      y: -100,
-      opacity: 0,
-      duration: 1,
-      ease: 'power3.out',
-      delay: 0.5
-    });
-  }, { scope: navRef });
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -83,9 +71,21 @@ const Navbar = () => {
         </defs>
       </svg>
 
-      <header 
+      <motion.header 
         ref={navRef}
-        className={`navbar ${scrollDirection === 'down' ? 'hidden' : ''} ${isScrolled ? 'scrolled' : ''}`}
+        className={`navbar ${isScrolled ? 'scrolled' : ''}`}
+        initial={{ y: -100, opacity: 0 }}
+        animate={scrollDirection === 'down' && isScrolled ? 'hidden' : 'visible'}
+        variants={{
+          visible: { y: 0, opacity: 1 },
+          hidden: { y: -100, opacity: 0 }
+        }}
+        transition={{ 
+          type: 'spring', 
+          stiffness: 120, 
+          damping: 20, 
+          delay: isScrolled ? 0 : 0.5 
+        }}
       >
         <div className="container navbar-container">
           <NavLink to="/" className="navbar-logo" onClick={closeMenu}>
@@ -116,7 +116,7 @@ const Navbar = () => {
             </div>
           </button>
         </div>
-      </header>
+      </motion.header>
 
       <AnimatePresence>
         {isOpen && (
