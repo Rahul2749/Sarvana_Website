@@ -1,7 +1,7 @@
 /* Minimal Editorial Premium Approach */
 .product-card {
-  background: transparent;
-  border: none;
+  background: rgba(250, 243, 232, 0.95);
+  border: 1px solid rgba(217, 180, 74, 0.15);
   border-radius: 0;
   overflow: visible;
   box-shadow: none;

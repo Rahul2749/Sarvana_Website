@@ -1,12 +1,16 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { navigationLinks, socialLinks } from '../../data/navigation';
+import { useStaggerReveal } from '../../hooks/useGSAPAnimations';
 import './Footer.css';
 
 const Footer = () => {
+  const footerGridRef = useRef(null);
+  useStaggerReveal(footerGridRef, '.footer-brand, .footer-links, .footer-newsletter');
   return (
     <footer className="footer">
       <div className="container">
-        <div className="footer-grid">
+        <div className="footer-grid" ref={footerGridRef}>
           <div className="footer-brand">
             <Link to="/" className="footer-logo">
               <img src="/images/Logo/transparent-logo.png" alt="Sarvana" />

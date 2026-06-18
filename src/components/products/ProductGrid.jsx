@@ -1,5 +1,5 @@
 import { useState, useRef } from 'react';
-import { useStaggerReveal } from '../../hooks/useGSAPAnimations';
+import { useScaleReveal } from '../../hooks/useGSAPAnimations';
 import SectionTitle from '../ui/SectionTitle';
 import ProductCard from './ProductCard';
 import Button from '../ui/Button';
@@ -17,7 +17,7 @@ const ProductGrid = () => {
     : products.filter(p => p.category === activeFilter).slice(0, 8);
 
   // Re-run animation when filter changes
-  useStaggerReveal(gridRef, '.product-card', [activeFilter]);
+  useScaleReveal(gridRef, '.product-card', [activeFilter]);
 
   return (
     <section className="section product-grid-section">

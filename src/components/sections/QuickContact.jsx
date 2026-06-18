@@ -1,7 +1,7 @@
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { useScrollReveal } from '../../hooks/useGSAPAnimations';
+import { useScrollReveal, useStaggerReveal } from '../../hooks/useGSAPAnimations';
 import SectionTitle from '../ui/SectionTitle';
 import Button from '../ui/Button';
 import './QuickContact.css';
@@ -10,8 +10,10 @@ const QuickContact = () => {
   const containerRef = useRef(null);
   const leftDecorRef = useRef(null);
   const rightDecorRef = useRef(null);
+  const formRef = useRef(null);
 
   useScrollReveal(containerRef);
+  useStaggerReveal(formRef, '.form-group, button');
 
   useGSAP(() => {
     if (leftDecorRef.current) {
@@ -61,6 +63,7 @@ const QuickContact = () => {
               title="Get in Touch"
               description="Have questions about our brewing process or organic sourcing? Reach out to us directly."
               align="left"
+              light={true}
             />
             
             <div className="contact-details">
@@ -102,7 +105,7 @@ const QuickContact = () => {
             </div>
           </div>
 
-          <div className="quick-contact-form-wrapper">
+          <div className="quick-contact-form-wrapper" ref={formRef}>
             <form className="quick-contact-form" onSubmit={(e) => e.preventDefault()}>
               <div className="form-group">
                 <input type="text" id="name" required placeholder=" " />

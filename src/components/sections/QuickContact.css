@@ -1,15 +1,26 @@
+/* Dark Editorial Premium Approach for QuickContact */
 .quick-contact {
-  background-color: var(--color-surface);
+  background-color: var(--color-primary-dark); /* Rich dark background */
   position: relative;
   overflow: hidden;
+  padding: var(--spacing-4xl) 0;
+  color: var(--color-text-light); /* Light text globally in section */
+}
+
+/* We need to ensure SectionTitle inherits light colors or target it directly */
+.quick-contact .section-title h2 {
+  color: var(--color-surface);
+}
+
+.quick-contact .section-title p {
+  color: rgba(250, 243, 232, 0.7);
 }
 
 .quick-contact-grid {
   display: grid;
   grid-template-columns: 1fr;
-  gap: var(--spacing-3xl);
-  margin-top: var(--spacing-xl);
-  align-items: center;
+  gap: var(--spacing-4xl);
+  align-items: flex-start;
   position: relative;
   z-index: 2;
 }
@@ -17,13 +28,14 @@
 @media (min-width: 768px) {
   .quick-contact-grid {
     grid-template-columns: 1fr 1fr;
+    gap: var(--spacing-4xl) 10%;
   }
 }
 
 .contact-details {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-lg);
+  gap: var(--spacing-xl);
   margin-top: var(--spacing-2xl);
 }
 
@@ -34,48 +46,59 @@
 }
 
 .contact-icon {
-  font-size: var(--text-xl);
-  background-color: var(--color-surface-alt);
-  color: var(--color-secondary);
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
+  background-color: transparent;
+  color: var(--color-accent); /* Gold icon */
+  width: 32px;
+  height: 32px;
+  border-radius: 0;
   display: flex;
-  align-items: center;
-  justify-content: center;
+  align-items: flex-start;
+  justify-content: flex-start;
   flex-shrink: 0;
-  border: 1px solid rgba(200, 148, 62, 0.2);
+  border: none;
+}
+
+/* Contact SVG icons */
+.contact-svg-icon {
+  width: 24px;
+  height: 24px;
+  stroke: var(--color-accent); /* Gold stroke */
+  stroke-width: 1.2;
+  display: block;
 }
 
 .contact-text h4 {
-  font-family: var(--font-display);
-  color: var(--color-primary);
-  margin-bottom: var(--spacing-xs);
-  font-size: var(--text-base);
+  font-family: var(--font-body);
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: var(--color-accent); /* Gold label */
+  margin-bottom: 6px;
+  font-size: 0.7rem;
+  font-weight: 600;
 }
 
 .contact-text p {
-  color: var(--color-text-muted);
-  font-size: var(--text-sm);
+  color: var(--color-surface); /* Cream text */
+  font-size: 1.1rem;
   margin: 0;
-  line-height: 1.5;
+  line-height: 1.4;
+  font-family: var(--font-display);
 }
 
-/* Form Styling */
+/* Form Styling - Dark Editorial */
 .quick-contact-form-wrapper {
-  background: rgba(250, 243, 232, 0.6);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
-  border: 1px solid rgba(200, 148, 62, 0.25);
-  padding: var(--spacing-2xl);
-  border-radius: var(--radius-xl);
-  box-shadow: 0 30px 60px rgba(53, 31, 19, 0.08), inset 0 1px 0 rgba(255, 255, 255, 0.6);
+  background: transparent;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  margin-top: var(--spacing-md);
 }
 
 .quick-contact-form {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-xl);
+  gap: var(--spacing-2xl);
 }
 
 .form-group {
@@ -86,45 +109,43 @@
 .form-group input,
 .form-group textarea {
   width: 100%;
-  padding: var(--spacing-sm) 0;
+  padding: 12px 0;
   border: none;
-  border-bottom: 2px solid rgba(200, 148, 62, 0.25);
-  border-radius: 0;
+  border-bottom: 1px solid rgba(250, 243, 232, 0.2); /* Light border */
   background: transparent;
   outline: none;
-  font-size: var(--text-base);
-  font-family: var(--font-body);
+  font-size: 1.1rem;
+  font-family: var(--font-display);
   transition: all var(--transition-normal);
-  color: var(--color-primary);
+  color: var(--color-surface); /* Light input text */
   box-sizing: border-box;
 }
 
 .form-group textarea {
   resize: none;
-  height: 100px;
+  height: 80px;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
-  border-bottom-color: var(--color-secondary);
-  background: transparent;
-  box-shadow: none;
+  border-bottom-color: var(--color-accent); /* Gold on focus */
 }
 
 .form-group label {
   position: absolute;
   left: 0;
-  top: 50%;
-  transform: translateY(-50%);
-  color: var(--color-text-muted);
-  font-size: var(--text-base);
+  top: 16px;
+  color: rgba(250, 243, 232, 0.5); /* Dimmer cream */
+  font-size: 0.8rem;
+  font-family: var(--font-body);
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
   pointer-events: none;
-  transition: all var(--transition-normal);
+  transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
 .form-group textarea ~ label {
-  top: var(--spacing-sm);
-  transform: none;
+  top: 12px;
 }
 
 /* Floating Label Behavior */
@@ -132,23 +153,33 @@
 .form-group input:not(:placeholder-shown) ~ label,
 .form-group textarea:focus ~ label,
 .form-group textarea:not(:placeholder-shown) ~ label {
-  top: -12px;
-  left: 0;
-  transform: scale(0.85);
-  background: transparent;
-  padding: 0;
-  color: var(--color-secondary);
+  top: -16px;
+  font-size: 0.65rem;
+  color: var(--color-accent); /* Gold floating label */
   font-weight: 600;
-  letter-spacing: 0.5px;
 }
 
-/* Contact SVG icons */
-.contact-svg-icon {
-  width: 24px;
-  height: 24px;
-  stroke: var(--color-secondary);
-  stroke-width: 1.8;
-  display: block;
+/* Button overrides for form - Dark theme */
+.quick-contact-form .btn {
+  margin-top: var(--spacing-md);
+  background: var(--color-accent) !important; /* Gold button */
+  color: var(--color-primary-dark) !important; /* Dark text */
+  border: none !important;
+  border-radius: 0 !important;
+  padding: 18px 36px !important;
+  font-family: var(--font-body) !important;
+  text-transform: uppercase !important;
+  letter-spacing: 2px !important;
+  font-size: 0.8rem !important;
+  font-weight: 600 !important;
+  transition: all 0.4s ease !important;
+  box-shadow: none !important;
+}
+
+.quick-contact-form .btn:hover {
+  background: var(--color-surface) !important; /* Cream on hover */
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3) !important;
 }
 
 /* Floating Decor elements in sections */
@@ -156,7 +187,7 @@
   position: absolute;
   pointer-events: none;
   z-index: 1;
-  opacity: 0.15;
+  opacity: 0.08; 
   transition: transform 0.5s ease-out;
 }
 
@@ -174,14 +205,11 @@
   height: 120px;
 }
 
-.floating-svg-decor {
-  width: 100%;
-  height: 100%;
-}
-
 .floating-img-decor {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  mix-blend-mode: screen;
+  /* On a dark background, normal blending or subtle opacity is better */
+  mix-blend-mode: normal;
+  filter: brightness(0.7) sepia(0.5);
 }

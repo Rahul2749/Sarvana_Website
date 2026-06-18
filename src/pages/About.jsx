@@ -1,7 +1,11 @@
+import { useRef } from 'react';
 import SectionTitle from '../components/ui/SectionTitle';
+import { useTimelineReveal } from '../hooks/useGSAPAnimations';
 import './About.css';
 
 const About = () => {
+  const timelineRef = useRef(null);
+  useTimelineReveal(timelineRef, '.timeline-item');
   return (
     <div className="page about-page">
       <div className="page-header">
@@ -26,7 +30,7 @@ const About = () => {
             </p>
           </div>
           
-          <div className="timeline">
+          <div className="timeline" ref={timelineRef}>
             <div className="timeline-item">
               <div className="timeline-dot"></div>
               <div className="timeline-content">

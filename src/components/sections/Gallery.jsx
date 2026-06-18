@@ -1,5 +1,5 @@
 import { useRef } from 'react';
-import { useStaggerReveal } from '../../hooks/useGSAPAnimations';
+import { useStaggerClipPathReveal } from '../../hooks/useGSAPAnimations';
 import SectionTitle from '../ui/SectionTitle';
 import './Gallery.css';
 
@@ -16,7 +16,7 @@ const galleryImages = [
 
 const Gallery = () => {
   const gridRef = useRef(null);
-  useStaggerReveal(gridRef, '.gallery-item');
+  useStaggerClipPathReveal(gridRef, '.gallery-item', 'bottom');
 
   return (
     <section className="section gallery-section">
