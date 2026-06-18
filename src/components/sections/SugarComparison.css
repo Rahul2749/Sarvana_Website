@@ -1,0 +1,119 @@
+.sugar-comparison {
+  background-color: var(--color-surface);
+}
+
+.comparison-table-wrapper {
+  overflow-x: auto;
+  margin-top: var(--spacing-3xl);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-md);
+  border: 1px solid rgba(200, 148, 62, 0.15);
+  background-color: var(--color-white);
+}
+
+.comparison-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+  min-width: 600px;
+}
+
+.comparison-table th, 
+.comparison-table td {
+  padding: var(--spacing-lg) var(--spacing-xl);
+  border-bottom: 1px solid rgba(53, 31, 19, 0.05);
+}
+
+.comparison-table th {
+  background-color: var(--color-primary);
+  color: var(--color-white);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: var(--text-lg);
+}
+
+.comparison-table th.highlight-column {
+  background-color: var(--color-secondary);
+  color: var(--color-white);
+}
+
+.feature-name {
+  font-family: var(--font-display);
+  color: var(--color-primary);
+  font-weight: 600;
+  width: 25%;
+}
+
+.comparison-table td.highlight-column {
+  background-color: rgba(200, 148, 62, 0.05);
+  width: 38%;
+}
+
+.comparison-table td strong {
+  display: block;
+  font-size: var(--text-base);
+  margin-bottom: var(--spacing-xs);
+}
+
+.comparison-table td.positive strong {
+  color: var(--color-green);
+}
+
+.comparison-table td.negative strong {
+  color: var(--color-terracotta);
+}
+
+.comparison-table td p {
+  color: var(--color-text-muted);
+  font-size: var(--text-sm);
+  line-height: 1.5;
+  margin: 0;
+}
+
+.jaggery-highlight-card {
+  margin-top: var(--spacing-2xl);
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  color: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  display: flex;
+  gap: var(--spacing-lg);
+  align-items: center;
+  box-shadow: var(--shadow-lg);
+  border: 1px solid rgba(200, 148, 62, 0.2);
+}
+
+.highlight-card-icon {
+  font-size: 3rem;
+  background-color: rgba(200, 148, 62, 0.15);
+  width: 70px;
+  height: 70px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border: 1px solid rgba(200, 148, 62, 0.3);
+  color: var(--color-accent);
+}
+
+.highlight-card-text h4 {
+  font-family: var(--font-display);
+  color: var(--color-accent);
+  font-size: var(--text-xl);
+  margin-bottom: var(--spacing-xs);
+}
+
+.highlight-card-text p {
+  color: var(--color-text-light);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  margin: 0;
+}
+
+@media (max-width: 768px) {
+  .jaggery-highlight-card {
+    flex-direction: column;
+    text-align: center;
+  }
+}

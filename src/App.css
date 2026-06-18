@@ -1,0 +1,19 @@
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex-grow: 1;
+  width: 100%;
+}
+
+.page {
+  width: 100%;
+}
+
+/* Base image placeholders for missing generated images */
+img {
+  background-color: var(--color-surface-dark);
+}

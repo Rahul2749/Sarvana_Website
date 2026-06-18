@@ -1,0 +1,115 @@
+.benefits {
+  background-color: var(--color-surface);
+  position: relative;
+  overflow: hidden;
+}
+
+.section-decor {
+  position: absolute;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.12;
+  transition: transform 0.1s ease-out;
+}
+
+.decor-left {
+  left: -2%;
+  top: 25%;
+  width: clamp(80px, 12vw, 140px);
+  aspect-ratio: 1;
+}
+
+.decor-right {
+  right: -2%;
+  bottom: 25%;
+  width: clamp(70px, 10vw, 120px);
+  aspect-ratio: 1;
+}
+
+.floating-svg-decor {
+  width: 100%;
+  height: 100%;
+}
+
+.floating-img-decor {
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  mix-blend-mode: screen;
+}
+
+.benefits-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-lg);
+  margin-top: var(--spacing-2xl);
+}
+
+@media (min-width: 640px) {
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .benefits-grid {
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--spacing-xl);
+  }
+}
+
+.benefit-card {
+  background-color: var(--color-white);
+  border-radius: var(--radius-lg);
+  padding: var(--spacing-xl);
+  text-align: center;
+  box-shadow: var(--shadow-sm);
+  transition: all var(--transition-normal);
+  border: 1px solid rgba(200, 148, 62, 0.1);
+}
+
+.benefit-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(217, 180, 74, 0.3);
+}
+
+.benefit-icon-wrapper {
+  width: 80px;
+  height: 80px;
+  margin: 0 auto var(--spacing-lg);
+  background-color: var(--color-surface-alt);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color var(--transition-normal);
+}
+
+.benefit-card:hover .benefit-icon-wrapper {
+  background-color: var(--color-accent);
+}
+
+.benefit-icon {
+  width: 40px;
+  height: 40px;
+  color: var(--color-secondary-dark);
+  transition: color var(--transition-normal);
+}
+
+.benefit-card:hover .benefit-icon {
+  color: var(--color-white);
+}
+
+.benefit-title {
+  font-family: var(--font-display);
+  font-size: var(--text-xl);
+  color: var(--color-primary);
+  margin-bottom: var(--spacing-sm);
+}
+
+.benefit-description {
+  color: var(--color-text-muted);
+  font-size: var(--text-base);
+  line-height: 1.6;
+}
