@@ -1,4 +1,6 @@
 import { useRef } from 'react';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 import { useScrollReveal } from '../../hooks/useGSAPAnimations';
 import SectionTitle from '../ui/SectionTitle';
 import Button from '../ui/Button';
@@ -6,18 +8,48 @@ import './QuickContact.css';
 
 const QuickContact = () => {
   const containerRef = useRef(null);
+  const leftDecorRef = useRef(null);
+  const rightDecorRef = useRef(null);
+
   useScrollReveal(containerRef);
+
+  useGSAP(() => {
+    if (leftDecorRef.current) {
+      gsap.to(leftDecorRef.current, {
+        yPercent: -25,
+        rotation: 10,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    }
+
+    if (rightDecorRef.current) {
+      gsap.to(rightDecorRef.current, {
+        yPercent: 30,
+        rotation: -15,
+        ease: 'none',
+        scrollTrigger: {
+          trigger: containerRef.current,
+          start: 'top bottom',
+          end: 'bottom top',
+          scrub: true
+        }
+      });
+    }
+  }, { scope: containerRef });
 
   return (
     <section ref={containerRef} className="quick-contact section">
       {/* Decorative background items */}
-      <div className="section-decor decor-left-bottom">
-        <svg viewBox="0 0 100 100" className="floating-svg-decor">
-          <ellipse cx="50" cy="50" rx="30" ry="40" fill="url(#coffeeGrad)" transform="rotate(-15 50 50)" />
-          <path d="M 50 10 Q 38 32 50 50 T 50 90" fill="none" stroke="url(#goldGrad)" strokeWidth="3.5" strokeLinecap="round" />
-        </svg>
+      <div className="section-decor decor-left-bottom" ref={leftDecorRef}>
+        <img src="/images/decor/decor-coffee-cup.png" alt="Coffee" className="floating-img-decor" />
       </div>
-      <div className="section-decor decor-right-top">
+      <div className="section-decor decor-right-top" ref={rightDecorRef}>
         <img src="/images/hero/item-jaggery.png" alt="Jaggery" className="floating-img-decor" />
       </div>
 

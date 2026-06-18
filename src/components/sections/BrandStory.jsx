@@ -50,10 +50,7 @@ const BrandStory = () => {
     <section ref={containerRef} className="section brand-story">
       {/* Decorative floating items */}
       <div className="section-decor decor-left floating-leaf" ref={leafRef}>
-        <svg viewBox="0 0 100 100" className="floating-svg-decor">
-          <path d="M50,15 C72,38 72,68 50,85 C28,68 28,38 50,15 Z" fill="url(#leafGrad)" transform="rotate(25 50 50)" />
-          <path d="M50,15 L50,85" stroke="url(#veinGrad)" strokeWidth="2.5" fill="none" />
-        </svg>
+        <img src="/images/decor/decor-tea-cup.png" alt="Tea" className="floating-img-decor" />
       </div>
       <div className="section-decor decor-right floating-jaggery" ref={jaggeryRef}>
         <img src="/images/hero/item-jaggery.png" alt="Jaggery" className="floating-img-decor" />
