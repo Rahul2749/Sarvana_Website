@@ -98,7 +98,7 @@ const Benefits = () => {
         
         <div ref={gridRef} className="benefits-grid">
           {benefitsData.map((benefit, index) => (
-            <div key={index} className="benefit-card">
+            <div key={index} className={`benefit-card card-${index + 1}`}>
               <div className="benefit-icon-wrapper">
                 <svg viewBox="0 0 24 24" className="benefit-icon">
                   <path d={benefit.icon} fill="currentColor" />

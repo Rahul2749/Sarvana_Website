@@ -4,6 +4,7 @@ import SectionTitle from '../ui/SectionTitle';
 import ProductCard from './ProductCard';
 import Button from '../ui/Button';
 import { products } from '../../data/products';
+import './ProductGrid.css';
 
 const ProductGrid = () => {
   const [activeFilter, setActiveFilter] = useState('All');
@@ -50,12 +51,7 @@ const ProductGrid = () => {
 
         <div 
           ref={gridRef}
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fill, minmax(280px, 1fr))',
-            gap: '2rem',
-            marginBottom: '3rem'
-          }}
+          className="product-grid-wrapper"
         >
           {filteredProducts.map(product => (
             <ProductCard key={`${product.id}-${activeFilter}`} product={product} />

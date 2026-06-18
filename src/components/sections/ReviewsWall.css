@@ -90,3 +90,43 @@
   margin: 0;
   font-style: italic;
 }
+
+/* Mobile responsive optimization */
+@media (max-width: 640px) {
+  .reviews-grid-wall {
+    gap: var(--spacing-md);
+    margin-top: var(--spacing-2xl);
+  }
+
+  .review-wall-card {
+    padding: var(--spacing-md);
+  }
+
+  .review-header {
+    gap: var(--spacing-sm);
+    margin-bottom: var(--spacing-sm);
+  }
+
+  .reviewer-avatar {
+    width: 40px;
+    height: 40px;
+  }
+
+  .reviewer-details h4 {
+    font-size: 0.95rem;
+  }
+
+  .reviewer-details span {
+    font-size: 10px;
+  }
+
+  .review-rating {
+    margin-bottom: var(--spacing-xs);
+    font-size: var(--text-xs);
+  }
+
+  .review-text {
+    font-size: 13px;
+    line-height: 1.5;
+  }
+}

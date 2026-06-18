@@ -1,0 +1,20 @@
+.product-grid-wrapper {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile by default */
+  gap: var(--spacing-sm); /* Compact gap on mobile */
+  margin-bottom: var(--spacing-3xl);
+}
+
+@media (min-width: 640px) {
+  .product-grid-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+    gap: var(--spacing-lg);
+  }
+}
+
+@media (min-width: 1024px) {
+  .product-grid-wrapper {
+    grid-template-columns: repeat(4, 1fr);
+    gap: var(--spacing-xl);
+  }
+}

@@ -28,8 +28,35 @@
 
 .process-step:hover {
   transform: translateY(-8px);
-  box-shadow: var(--shadow-lg), 0 10px 30px rgba(200, 148, 62, 0.1);
+}
+
+/* Specific Accent Border and Colors for each step */
+.process-step.step-1 { border-top: 4px solid var(--color-secondary); }
+.process-step.step-2 { border-top: 4px solid var(--color-terracotta); }
+.process-step.step-3 { border-top: 4px solid var(--color-primary-light); }
+.process-step.step-4 { border-top: 4px solid var(--color-green); }
+
+.process-step.step-1 .process-icon-wrapper { border-color: rgba(200, 148, 62, 0.4); color: var(--color-secondary); }
+.process-step.step-2 .process-icon-wrapper { border-color: rgba(184, 89, 42, 0.4); color: var(--color-terracotta); }
+.process-step.step-3 .process-icon-wrapper { border-color: rgba(74, 46, 28, 0.4); color: var(--color-primary-light); }
+.process-step.step-4 .process-icon-wrapper { border-color: rgba(45, 80, 22, 0.4); color: var(--color-green); }
+
+/* Hover states with specific shadows and colors */
+.process-step.step-1:hover {
+  box-shadow: 0 15px 35px rgba(200, 148, 62, 0.15);
   border-color: var(--color-secondary);
+}
+.process-step.step-2:hover {
+  box-shadow: 0 15px 35px rgba(184, 89, 42, 0.15);
+  border-color: var(--color-terracotta);
+}
+.process-step.step-3:hover {
+  box-shadow: 0 15px 35px rgba(74, 46, 28, 0.15);
+  border-color: var(--color-primary-light);
+}
+.process-step.step-4:hover {
+  box-shadow: 0 15px 35px rgba(45, 80, 22, 0.15);
+  border-color: var(--color-green);
 }
 
 .process-icon-wrapper {
@@ -48,10 +75,13 @@
 }
 
 .process-step:hover .process-icon-wrapper {
-  background-color: var(--color-secondary);
   color: var(--color-white);
-  transform: scale(1.1);
+  transform: scale(1.08);
 }
+.process-step.step-1:hover .process-icon-wrapper { background-color: var(--color-secondary); border-color: var(--color-secondary); }
+.process-step.step-2:hover .process-icon-wrapper { background-color: var(--color-terracotta); border-color: var(--color-terracotta); }
+.process-step.step-3:hover .process-icon-wrapper { background-color: var(--color-primary-light); border-color: var(--color-primary-light); }
+.process-step.step-4:hover .process-icon-wrapper { background-color: var(--color-green); border-color: var(--color-green); }
 
 .process-icon svg {
   width: 36px;
