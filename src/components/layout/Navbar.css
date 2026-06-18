@@ -23,10 +23,16 @@
   border-bottom: 1px solid rgba(217, 180, 74, 0.2);
 }
 
+/* Luxurious Fluid Container for Widescreens */
 .navbar-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 4%;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  transition: padding var(--transition-normal);
 }
 
 /* Premium Rounded Logo Badge */
@@ -67,9 +73,40 @@
   border-color: rgba(217, 180, 74, 0.4);
 }
 
+/* Desktop Links & Actions (Hidden by default, shown on desktop) */
 .navbar-links {
-  display: flex;
+  display: none;
   gap: var(--spacing-lg);
+}
+
+.navbar-actions {
+  display: none;
+}
+
+.desktop-only {
+  display: none !important;
+}
+
+.mobile-only {
+  display: block !important;
+}
+
+@media (min-width: 1024px) {
+  .navbar-links {
+    display: flex;
+  }
+  
+  .navbar-actions {
+    display: flex;
+  }
+
+  .desktop-only {
+    display: flex !important;
+  }
+  
+  .mobile-only {
+    display: none !important;
+  }
 }
 
 /* Desktop Links with Centered Underline Reveal */
@@ -110,31 +147,14 @@
   text-shadow: 0 0 8px rgba(217, 180, 74, 0.2);
 }
 
-.desktop-only {
-  display: none;
-}
-
-.mobile-only {
-  display: block;
-}
-
-@media (min-width: 1024px) {
-  .desktop-only {
-    display: flex;
-  }
-  .mobile-only {
-    display: none;
-  }
-}
-
-/* Premium Hamburger Button */
+/* Premium Hamburger Button (Hidden on desktop, shown on mobile/tablet) */
 .hamburger-btn {
+  display: none;
   background: none;
   border: none;
   cursor: pointer;
   z-index: calc(var(--z-modal) + 1);
   padding: 10px;
-  display: flex;
   align-items: center;
   justify-content: center;
   transition: transform var(--transition-fast);
@@ -142,6 +162,12 @@
 
 .hamburger-btn:hover {
   transform: scale(1.05);
+}
+
+@media (max-width: 1023px) {
+  .hamburger-btn {
+    display: flex;
+  }
 }
 
 .hamburger {
@@ -317,6 +343,10 @@
     padding: var(--spacing-sm) 0;
   }
   
+  .navbar-container {
+    padding: 0 var(--spacing-md);
+  }
+
   .navbar-logo {
     height: 46px;
     width: 46px;

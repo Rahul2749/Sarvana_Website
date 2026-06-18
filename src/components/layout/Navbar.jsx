@@ -87,7 +87,7 @@ const Navbar = () => {
           delay: isScrolled ? 0 : 0.5 
         }}
       >
-        <div className="container navbar-container">
+        <div className="navbar-container">
           <NavLink to="/" className="navbar-logo" onClick={closeMenu}>
             <img src="/images/Logo/logo.jpeg" alt="Sarvana" />
           </NavLink>
