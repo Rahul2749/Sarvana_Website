@@ -89,7 +89,7 @@ const Navbar = () => {
       >
         <div className="navbar-container">
           <NavLink to="/" className="navbar-logo" onClick={closeMenu}>
-            <img src="/images/Logo/transparent-logo.png" alt="Sarvana" />
+            <img src="/images/Logo/logo.jpeg" alt="Sarvana" />
           </NavLink>
 
           <nav className="navbar-links desktop-only">
