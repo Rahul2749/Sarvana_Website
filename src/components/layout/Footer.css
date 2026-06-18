@@ -8,16 +8,33 @@
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1fr;
-  gap: var(--spacing-2xl);
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-xl) var(--spacing-md);
   margin-bottom: var(--spacing-3xl);
   position: relative;
   z-index: 2;
 }
 
+.footer-brand {
+  grid-column: span 2;
+}
+
+.footer-newsletter {
+  grid-column: span 2;
+}
+
 @media (min-width: 768px) {
   .footer-grid {
     grid-template-columns: 2fr 1fr 1fr 1.5fr;
+    gap: var(--spacing-2xl);
+  }
+  
+  .footer-brand {
+    grid-column: span 1;
+  }
+  
+  .footer-newsletter {
+    grid-column: span 1;
   }
 }
 
