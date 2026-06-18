@@ -59,13 +59,23 @@
 }
 
 .benefit-card {
-  background-color: var(--color-white);
+  background: rgba(250, 243, 232, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius-lg);
   padding: var(--spacing-xl);
   text-align: center;
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-normal);
-  border: 1px solid rgba(200, 148, 62, 0.1);
+  border: 1px solid rgba(200, 148, 62, 0.22);
+  position: relative;
+}
+
+.benefit-card-inner {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Specific Accent Border and Colors for each card */
@@ -85,15 +95,16 @@
 .benefit-card.card-6 .benefit-icon { color: var(--color-secondary); }
 
 /* Hover states with specific shadows */
-.benefit-card.card-1:hover { box-shadow: 0 15px 35px rgba(200, 148, 62, 0.15); border-color: var(--color-secondary); }
-.benefit-card.card-2:hover { box-shadow: 0 15px 35px rgba(184, 89, 42, 0.15); border-color: var(--color-terracotta); }
-.benefit-card.card-3:hover { box-shadow: 0 15px 35px rgba(45, 80, 22, 0.15); border-color: var(--color-green); }
-.benefit-card.card-4:hover { box-shadow: 0 15px 35px rgba(45, 80, 22, 0.15); border-color: var(--color-green); }
-.benefit-card.card-5:hover { box-shadow: 0 15px 35px rgba(74, 46, 28, 0.15); border-color: var(--color-primary-light); }
-.benefit-card.card-6:hover { box-shadow: 0 15px 35px rgba(200, 148, 62, 0.15); border-color: var(--color-secondary); }
+.benefit-card.card-1:hover { box-shadow: 0 15px 35px rgba(200, 148, 62, 0.18); border-color: var(--color-secondary); }
+.benefit-card.card-2:hover { box-shadow: 0 15px 35px rgba(184, 89, 42, 0.18); border-color: var(--color-terracotta); }
+.benefit-card.card-3:hover { box-shadow: 0 15px 35px rgba(45, 80, 22, 0.18); border-color: var(--color-green); }
+.benefit-card.card-4:hover { box-shadow: 0 15px 35px rgba(45, 80, 22, 0.18); border-color: var(--color-green); }
+.benefit-card.card-5:hover { box-shadow: 0 15px 35px rgba(74, 46, 28, 0.18); border-color: var(--color-primary-light); }
+.benefit-card.card-6:hover { box-shadow: 0 15px 35px rgba(200, 148, 62, 0.18); border-color: var(--color-secondary); }
 
 .benefit-card:hover {
   transform: translateY(-8px);
+  background: rgba(250, 243, 232, 0.85);
 }
 
 .benefit-icon-wrapper {

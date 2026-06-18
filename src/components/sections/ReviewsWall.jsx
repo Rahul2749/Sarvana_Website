@@ -29,21 +29,23 @@ const ReviewsWall = () => {
         <div className="reviews-grid-wall">
           {testimonials.map((review) => (
             <div key={review.id} className="review-wall-card">
-              <div className="review-header">
-                <div className="reviewer-avatar">
-                  <img src={review.avatar} alt={review.name} />
+              <div className="review-card-inner">
+                <div className="review-header">
+                  <div className="reviewer-avatar">
+                    <img src={review.avatar} alt={review.name} />
+                  </div>
+                  <div className="reviewer-details">
+                    <h4>{review.name}</h4>
+                    <span>{review.role} • {review.location}</span>
+                  </div>
                 </div>
-                <div className="reviewer-details">
-                  <h4>{review.name}</h4>
-                  <span>{review.role} • {review.location}</span>
+                <div className="review-rating">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <span key={i} className={`star ${i < review.rating ? 'active' : ''}`}>★</span>
+                  ))}
                 </div>
+                <p className="review-text">"{review.text}"</p>
               </div>
-              <div className="review-rating">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <span key={i} className={`star ${i < review.rating ? 'active' : ''}`}>★</span>
-                ))}
-              </div>
-              <p className="review-text">"{review.text}"</p>
             </div>
           ))}
         </div>

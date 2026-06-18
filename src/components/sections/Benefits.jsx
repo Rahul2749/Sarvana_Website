@@ -110,13 +110,15 @@ const Benefits = () => {
         <div ref={gridRef} className="benefits-grid">
           {benefitsData.map((benefit, index) => (
             <div key={index} className={`benefit-card card-${index + 1}`}>
-              <div className="benefit-icon-wrapper">
-                <svg viewBox="0 0 24 24" className="benefit-icon">
-                  <path d={benefit.icon} fill="currentColor" />
-                </svg>
+              <div className="benefit-card-inner">
+                <div className="benefit-icon-wrapper">
+                  <svg viewBox="0 0 24 24" className="benefit-icon">
+                    <path d={benefit.icon} fill="currentColor" />
+                  </svg>
+                </div>
+                <h3 className="benefit-title">{benefit.title}</h3>
+                <p className="benefit-description">{benefit.description}</p>
               </div>
-              <h3 className="benefit-title">{benefit.title}</h3>
-              <p className="benefit-description">{benefit.description}</p>
             </div>
           ))}
         </div>

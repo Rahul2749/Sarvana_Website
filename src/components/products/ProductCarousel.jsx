@@ -59,15 +59,17 @@ const ProductCarousel = () => {
         {categories.map((cat, index) => (
           <div key={cat.id} className="carousel-panel">
             <div className="panel-content">
-              <div className="panel-text">
-                <span className="panel-number">0{index + 1}</span>
-                <h3 style={{ color: cat.color }}>{cat.title}</h3>
-                <p>{cat.description}</p>
-                <Button variant="primary" href={`/products?category=${cat.id}`}>View Collection</Button>
-              </div>
-              <div className="panel-image-container">
-                <div className="panel-image-overlay" style={{ backgroundColor: cat.color }}></div>
-                <img src={cat.image} alt={cat.title} className="panel-image" />
+              <div className="panel-content-inner">
+                <div className="panel-text">
+                  <span className="panel-number">0{index + 1}</span>
+                  <h3 style={{ color: cat.color }}>{cat.title}</h3>
+                  <p>{cat.description}</p>
+                  <Button variant="primary" href={`/products?category=${cat.id}`}>View Collection</Button>
+                </div>
+                <div className="panel-image-container">
+                  <div className="panel-image-overlay" style={{ backgroundColor: cat.color }}></div>
+                  <img src={cat.image} alt={cat.title} className="panel-image" />
+                </div>
               </div>
             </div>
           </div>

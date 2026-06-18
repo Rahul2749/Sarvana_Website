@@ -13,21 +13,32 @@
 }
 
 .process-step {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  text-align: center;
-  position: relative;
-  background-color: var(--color-white);
+  background: rgba(250, 243, 232, 0.65);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   padding: var(--spacing-xl);
   border-radius: var(--radius-lg);
   box-shadow: var(--shadow-sm);
   transition: all var(--transition-normal);
-  border: 1px solid rgba(200, 148, 62, 0.1);
+  border: 1px solid rgba(200, 148, 62, 0.22);
+  transform: skewX(-5deg);
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.process-step-inner {
+  transform: skewX(5deg);
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .process-step:hover {
-  transform: translateY(-8px);
+  transform: translateY(-8px) skewX(-5deg);
+  background: rgba(250, 243, 232, 0.85);
 }
 
 /* Specific Accent Border and Colors for each step */

@@ -66,13 +66,15 @@ const ProcessJourney = () => {
         <div className="process-timeline">
           {steps.map((step, idx) => (
             <div key={idx} className={`process-step step-${idx + 1}`}>
-              <div className="process-icon-wrapper">
-                <div className="process-icon">{step.icon}</div>
-                <span className="process-number">{step.number}</span>
-              </div>
-              <div className="process-info">
-                <h3>{step.title}</h3>
-                <p>{step.description}</p>
+              <div className="process-step-inner">
+                <div className="process-icon-wrapper">
+                  <div className="process-icon">{step.icon}</div>
+                  <span className="process-number">{step.number}</span>
+                </div>
+                <div className="process-info">
+                  <h3>{step.title}</h3>
+                  <p>{step.description}</p>
+                </div>
               </div>
               {idx < steps.length - 1 && <div className="process-connector-line"></div>}
             </div>
