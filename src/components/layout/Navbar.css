@@ -26,9 +26,8 @@
 /* Luxurious Fluid Container for Widescreens */
 .navbar-container {
   width: 100%;
-  max-width: 1440px;
-  margin: 0 auto;
-  padding: 0 4%;
+  max-width: 100%;
+  padding: 0 var(--spacing-xl);
   display: flex;
   justify-content: space-between;
   align-items: center;
