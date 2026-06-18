@@ -9,7 +9,7 @@ const Footer = () => {
         <div className="footer-grid">
           <div className="footer-brand">
             <Link to="/" className="footer-logo">
-              <img src="/images/Logo/logo.jpeg" alt="Sarvana" />
+              <img src="/images/Logo/transparent-logo.png" alt="Sarvana" />
             </Link>
             <p className="footer-description">
               Premium tea, coffee, and snacks naturally sweetened with the goodness of traditional Thati Bellam.
