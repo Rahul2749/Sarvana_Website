@@ -1,0 +1,58 @@
+.steam-container {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 50%;
+  height: 60px;
+  pointer-events: none;
+  z-index: 5;
+  overflow: visible;
+}
+
+.steam-wisp {
+  position: absolute;
+  bottom: 0;
+  width: 16px;
+  height: 40px;
+  border-radius: 50%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(255, 255, 255, 0.2) 0%,
+    rgba(255, 255, 255, 0.05) 50%,
+    transparent 70%
+  );
+  filter: blur(4px);
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+}
+
+.steam-wisp:nth-child(1) {
+  left: 30%;
+  animation: steamRise 3.5s ease-out infinite;
+}
+
+.steam-wisp:nth-child(2) {
+  left: 50%;
+  width: 18px;
+  height: 45px;
+  animation: steamRise2 4s ease-out infinite 0.8s;
+}
+
+.steam-wisp:nth-child(3) {
+  left: 65%;
+  width: 14px;
+  height: 35px;
+  animation: steamRise3 3s ease-out infinite 1.5s;
+}
+
+@media (max-width: 768px) {
+  .steam-container {
+    height: 40px;
+  }
+  .steam-wisp {
+    filter: blur(3px);
+    width: 10px;
+    height: 25px;
+  }
+}

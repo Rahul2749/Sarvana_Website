@@ -1,126 +1,171 @@
 import { useRef } from 'react';
+import { motion, useInView } from 'framer-motion';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import { useStaggerReveal } from '../../hooks/useGSAPAnimations';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import SectionTitle from '../ui/SectionTitle';
 import './Benefits.css';
 
+gsap.registerPlugin(ScrollTrigger);
+
 const benefitsData = [
   {
+    id: 1,
     title: "Rich in Minerals",
     description: "Packed with essential minerals like Iron, Calcium, and Potassium that refined sugar lacks.",
     icon: "M13 10V3L4 14h7v7l9-11h-7z"
   },
   {
+    id: 2,
     title: "Lower Glycemic Index",
     description: "Causes a slower rise in blood sugar levels, making it a better choice for mindful consumption.",
     icon: "M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"
   },
   {
+    id: 3,
+    title: "100% Unrefined & Pure",
+    description: "No chemicals, no bleaching—just the pure, natural sap of the Palmyra tree harvested with care.",
+    icon: "M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z",
+    featured: true
+  },
+  {
+    id: 4,
     title: "Boosts Immunity",
-    description: "Traditionally used to soothe throats and relieve coughs due to its antioxidant properties.",
+    description: "Traditionally used to soothe throats and relieve coughs due to its powerful antioxidant properties.",
     icon: "M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"
   },
   {
-    title: "Aids Digestion",
-    description: "Activates digestive enzymes and helps cleanse the liver and intestines of toxins.",
-    icon: "M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"
-  },
-  {
+    id: 5,
     title: "Natural Energy Source",
-    description: "Complex carbohydrates provide gradual, sustained energy rather than a sudden spike.",
+    description: "Complex carbohydrates provide gradual, sustained energy rather than a sudden spike and crash.",
     icon: "M11.99 2C6.47 2 2 6.48 2 12s4.47 10 9.99 10C17.52 22 22 17.52 22 12S17.52 2 11.99 2zM12 20c-4.42 0-8-3.58-8-8s3.58-8 8-8 8 3.58 8 8-3.58 8-8 8zm.5-13H11v6l5.25 3.15.75-1.23-4.5-2.67z"
-  },
-  {
-    title: "100% Unrefined",
-    description: "No chemicals, no bleaching—just the pure, natural sap of the Palmyra tree.",
-    icon: "M20 6h-4V4c0-1.11-.89-2-2-2h-4c-1.11 0-2 .89-2 2v2H4c-1.11 0-1.99.89-1.99 2L2 19c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V8c0-1.11-.89-2-2-2zm-6 0h-4V4h4v2z"
   }
 ];
 
-const Benefits = () => {
-  const containerRef = useRef(null);
-  const gridRef = useRef(null);
-  const leafRef = useRef(null);
-  const jaggeryRef = useRef(null);
+const cardVariants = {
+  hidden: { opacity: 0, y: 50, scale: 0.9 },
+  visible: (i) => ({
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      delay: i * 0.15,
+      duration: 0.8,
+      ease: [0.21, 1.11, 0.81, 0.99] // Spring-like custom ease
+    }
+  })
+};
 
-  useStaggerReveal(gridRef, '.benefit-card');
+const Benefits = () => {
+  const sectionRef = useRef(null);
+  const svgLinesRef = useRef(null);
+  const isInView = useInView(sectionRef, { once: true, amount: 0.2 });
 
   useGSAP(() => {
-    if (leafRef.current) {
-      gsap.to(leafRef.current, {
-        yPercent: 35,
-        rotation: -15,
+    // Parallax floating background elements
+    const floaters = gsap.utils.toArray('.b-floating');
+    floaters.forEach((el, i) => {
+      gsap.to(el, {
+        y: () => -50 - (i * 20),
+        rotation: () => 15 + (i * 10),
         ease: 'none',
         scrollTrigger: {
-          trigger: containerRef.current,
+          trigger: sectionRef.current,
           start: 'top bottom',
           end: 'bottom top',
           scrub: true
         }
       });
-    }
+    });
 
-    if (jaggeryRef.current) {
-      gsap.to(jaggeryRef.current, {
-        yPercent: -35,
-        rotation: 15,
-        ease: 'none',
-        scrollTrigger: {
-          trigger: containerRef.current,
-          start: 'top bottom',
-          end: 'bottom top',
-          scrub: true
-        }
+    // SVG Line Drawing Animation
+    if (svgLinesRef.current) {
+      const paths = svgLinesRef.current.querySelectorAll('path');
+      paths.forEach((path) => {
+        const length = path.getTotalLength();
+        gsap.set(path, { strokeDasharray: length, strokeDashoffset: length });
+        
+        gsap.to(path, {
+          strokeDashoffset: 0,
+          duration: 2.5,
+          ease: 'power3.inOut',
+          scrollTrigger: {
+            trigger: sectionRef.current,
+            start: 'top 60%',
+          }
+        });
       });
     }
-  }, { scope: containerRef });
+  }, { scope: sectionRef });
 
   return (
-    <section ref={containerRef} className="section benefits">
-      {/* Decorative background items */}
-      <div className="section-decor decor-left floating-leaf" ref={leafRef}>
-        <svg viewBox="0 0 100 100" className="floating-svg-decor">
-          <defs>
-            <linearGradient id="benefitLeafGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#2D5016" />
-              <stop offset="100%" stopColor="#1E330F" />
-            </linearGradient>
-            <linearGradient id="benefitVeinGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stopColor="#D9B44A" stopOpacity="0.8" />
-              <stop offset="100%" stopColor="#C8943E" stopOpacity="0.4" />
-            </linearGradient>
-          </defs>
-          <path d="M50,15 C72,38 72,68 50,85 C28,68 28,38 50,15 Z" fill="url(#benefitLeafGrad)" transform="rotate(25 50 50)" />
-          <path d="M50,15 L50,85" stroke="url(#benefitVeinGrad)" strokeWidth="2.5" fill="none" />
-          <path d="M50,35 Q60,30 65,25 M50,45 Q62,40 67,33 M50,55 Q62,50 67,43 M50,35 Q40,30 35,25 M50,45 Q38,40 33,33 M50,55 Q38,50 33,43" fill="none" stroke="url(#benefitVeinGrad)" strokeWidth="1.2" />
+    <section ref={sectionRef} className="benefits-premium" style={{ backgroundColor: 'var(--color-primary-dark)', position: 'relative', overflow: 'hidden' }}>
+      {/* Background Ambience */}
+      <div className="b-glow b-glow-left"></div>
+      <div className="b-glow b-glow-right"></div>
+      
+      {/* Floating Elements */}
+      <div className="b-floating b-leaf-1">
+        <svg viewBox="0 0 100 100" style={{ width: '100%', height: '100%' }}>
+          <path d="M50,15 C72,38 72,68 50,85 C28,68 28,38 50,15 Z" fill="#2D5016" opacity="0.3" />
         </svg>
       </div>
-      <div className="section-decor decor-right floating-jaggery" ref={jaggeryRef}>
-        <img src="/images/hero/item-jaggery.png" alt="Jaggery" className="floating-img-decor" />
-      </div>
+      <div className="b-floating b-dust-1">✦</div>
+      <div className="b-floating b-dust-2">✦</div>
 
       <div className="container">
-        <SectionTitle 
-          subtitle="Why Palm Jaggery?" 
-          title="Nature's Sweetest Gift" 
-          description="Discover the traditional health benefits of Thati Bellam that make every sip of our tea and coffee not just delicious, but nourishing."
-        />
-        
-        <div ref={gridRef} className="benefits-grid">
-          {benefitsData.map((benefit, index) => (
-            <div key={index} className={`benefit-card card-${index + 1}`}>
-              <div className="benefit-card-inner">
-                <div className="benefit-icon-wrapper">
-                  <svg viewBox="0 0 24 24" className="benefit-icon">
-                    <path d={benefit.icon} fill="currentColor" />
-                  </svg>
+        <div className="benefits-header">
+          <SectionTitle 
+            subtitle="Why Palm Jaggery?" 
+            title="Nature's Sweetest Gift" 
+            description="Discover the traditional health benefits of Thati Bellam that make every sip of our tea and coffee not just delicious, but deeply nourishing."
+            light={true}
+          />
+        </div>
+
+        <div className="benefits-grid-layout">
+          
+          {/* SVG Connection Lines (Absolute behind cards) */}
+          <svg ref={svgLinesRef} className="benefits-connection-lines" viewBox="0 0 1000 600" preserveAspectRatio="none">
+            {/* Lines connecting outer cards to the center */}
+            <path d="M 200 150 Q 500 100 500 300" className="b-line" />
+            <path d="M 800 150 Q 500 100 500 300" className="b-line" />
+            <path d="M 200 450 Q 500 500 500 300" className="b-line" />
+            <path d="M 800 450 Q 500 500 500 300" className="b-line" />
+          </svg>
+
+          {/* Grid of Cards */}
+          <div className="b-grid">
+            {benefitsData.map((benefit, i) => (
+              <motion.div 
+                key={benefit.id}
+                custom={i}
+                variants={cardVariants}
+                initial="hidden"
+                animate={isInView ? "visible" : "hidden"}
+                className={`b-card-wrapper ${benefit.featured ? 'b-featured' : `b-card-${i}`}`}
+              >
+                <div className={`b-card ${benefit.featured ? 'b-card-gold' : ''}`}>
+                  <div className="b-card-glow"></div>
+                  <div className="b-card-content">
+                    <div className="b-icon-box">
+                      <svg viewBox="0 0 24 24" className="b-icon">
+                        <path d={benefit.icon} fill="currentColor" />
+                      </svg>
+                    </div>
+                    <h3 className="b-card-title">{benefit.title}</h3>
+                    <p className="b-card-desc">{benefit.description}</p>
+                    {benefit.featured && (
+                      <div className="b-card-featured-image">
+                        <img src="/images/hero/item-jaggery.png" alt="Premium Palm Jaggery" />
+                      </div>
+                    )}
+                  </div>
                 </div>
-                <h3 className="benefit-title">{benefit.title}</h3>
-                <p className="benefit-description">{benefit.description}</p>
-              </div>
-            </div>
-          ))}
+              </motion.div>
+            ))}
+          </div>
+
         </div>
       </div>
     </section>

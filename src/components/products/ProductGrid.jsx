@@ -1,5 +1,6 @@
 import { useState, useRef } from 'react';
-import { useScaleReveal } from '../../hooks/useGSAPAnimations';
+import { useGSAP } from '@gsap/react';
+import { cardEmerge } from '../../utils/gsapAnimations';
 import SectionTitle from '../ui/SectionTitle';
 import ProductCard from './ProductCard';
 import Button from '../ui/Button';
@@ -16,8 +17,15 @@ const ProductGrid = () => {
     ? products.slice(0, 8) 
     : products.filter(p => p.category === activeFilter).slice(0, 8);
 
-  // Re-run animation when filter changes
-  useScaleReveal(gridRef, '.product-card', [activeFilter]);
+  // Card emerge animation — rise from below with fade + scale
+  useGSAP(() => {
+    if (gridRef.current) {
+      const cards = gridRef.current.querySelectorAll('.product-card');
+      if (cards.length) {
+        cardEmerge(cards, gridRef.current, 0.1);
+      }
+    }
+  }, { scope: gridRef, dependencies: [activeFilter] });
 
   return (
     <section className="section product-grid-section">

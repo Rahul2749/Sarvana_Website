@@ -1,144 +1,227 @@
-import { useRef } from 'react';
+import { useRef, useEffect, useState, lazy, Suspense } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
-import HeroScene from '../three/HeroScene';
+import SteamEffect from './SteamEffect';
 import Button from '../ui/Button';
 import './Hero.css';
+
+// Lazy-load Three.js scene so it doesn't block the entrance animations
+const HeroScene = lazy(() => import('../three/HeroScene'));
 
 const Hero = () => {
   const heroRef = useRef(null);
   const contentRef = useRef(null);
   const logoRef = useRef(null);
-  const titleRef = useRef(null);
   const buttonsRef = useRef(null);
+  const glassPanelRef = useRef(null);
+  const teaCupRef = useRef(null);
+  const coffeeCupRef = useRef(null);
   const floatingRefs = useRef([]);
   const floatingInnerRefs = useRef([]);
+  const [showScene, setShowScene] = useState(false);
+
+  // Delay Three.js mount until after entrance animations finish
+  useEffect(() => {
+    const timer = setTimeout(() => setShowScene(true), 2800);
+    return () => clearTimeout(timer);
+  }, []);
 
   useGSAP(() => {
-    const tl = gsap.timeline();
+    // Single clean timeline — no overlapping, sequential flow
+    const tl = gsap.timeline({
+      defaults: { ease: 'power3.out', force3D: true },
+      delay: 0.2,
+    });
 
-    // 1. Initial entrance for central content
-    tl.from(logoRef.current, {
-      scale: 0.2,
-      rotation: -45,
-      opacity: 0,
-      duration: 1.5,
-      ease: 'back.out(1.5)',
-      delay: 0.3
-    })
+    // 1. Logo — simple fade + scale
+    tl.fromTo(logoRef.current,
+      { scale: 0.5, opacity: 0 },
+      { scale: 1, opacity: 1, duration: 1, ease: 'back.out(1.2)' }
+    )
+    // 2. Glass panel — simple fade up
+    .fromTo(glassPanelRef.current,
+      { opacity: 0, y: 20 },
+      { opacity: 1, y: 0, duration: 0.7 },
+      '-=0.5'
+    )
+    // 3. Title words — stagger reveal
     .to('.animated-word', {
       y: 0,
       opacity: 1,
-      duration: 1.2,
-      stagger: 0.05,
-      ease: 'power4.out'
-    }, '-=1.0')
-    .from('.hero-subtitle', {
-      y: 30,
-      opacity: 0,
-      duration: 1,
-      ease: 'power3.out'
-    }, '-=0.8')
-    .from(buttonsRef.current.children, {
-      y: 20,
-      opacity: 0,
       duration: 0.8,
-      stagger: 0.15,
-      ease: 'back.out(1.7)'
-    }, '-=0.6')
-    .from('.scroll-indicator', {
-      y: -20,
-      opacity: 0,
-      duration: 0.8,
-      ease: 'power3.out'
-    }, '-=0.4');
+      stagger: 0.035,
+      ease: 'power4.out',
+    }, '-=0.3')
+    // 4. Subtitle
+    .fromTo('.hero-subtitle',
+      { y: 15, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.6 },
+      '-=0.3'
+    )
+    // 5. Divider
+    .fromTo('.hero-divider',
+      { scaleX: 0 },
+      { scaleX: 1, duration: 0.5 },
+      '-=0.3'
+    )
+    // 6. Buttons
+    .fromTo(buttonsRef.current?.children || [],
+      { y: 15, opacity: 0 },
+      { y: 0, opacity: 1, duration: 0.5, stagger: 0.08 },
+      '-=0.2'
+    )
+    // 7. Scroll indicator
+    .fromTo('.scroll-indicator',
+      { opacity: 0 },
+      { opacity: 1, duration: 0.4 },
+      '-=0.2'
+    );
 
-    // 2. Entrance for floating elements
-    floatingRefs.current.forEach((el, index) => {
+    // Cup entrances — after main content
+    if (teaCupRef.current) {
+      tl.fromTo(teaCupRef.current,
+        { x: -60, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.8 },
+        '-=0.8'
+      );
+    }
+    if (coffeeCupRef.current) {
+      tl.fromTo(coffeeCupRef.current,
+        { x: 60, opacity: 0 },
+        { x: 0, opacity: 1, duration: 0.8 },
+        '-=0.7'
+      );
+    }
+
+    // Floating elements — simple pop in
+    floatingRefs.current.forEach((el) => {
       if (el) {
         tl.fromTo(el,
-          { opacity: 0, scale: 0, rotation: index % 2 === 0 ? -60 : 60 },
-          { opacity: 1, scale: 1, rotation: 0, duration: 1.2, ease: 'back.out(1.2)' },
-          '-=1.2'
+          { opacity: 0, scale: 0.5 },
+          { opacity: 1, scale: 1, duration: 0.5 },
+          '-=0.5'
         );
       }
     });
 
-    // 3. Continuous gentle floating animation on the INNER container
-    floatingInnerRefs.current.forEach((el, index) => {
+    // ── Continuous animations (lightweight) ──
+
+    // Floating inner bob
+    floatingInnerRefs.current.forEach((el, i) => {
       if (el) {
         gsap.to(el, {
-          y: '+=20',
-          rotation: index % 2 === 0 ? 8 : -8,
-          duration: 4 + index * 0.8,
+          y: '+=12',
+          duration: 4.5 + i * 0.6,
           repeat: -1,
           yoyo: true,
           ease: 'sine.inOut',
-          delay: index * 0.2
+          delay: i * 0.4,
         });
       }
     });
 
-    // 4. Parallax effect linked to scroll (scrubbing)
+    // Cup bob
+    [teaCupRef, coffeeCupRef].forEach((ref, i) => {
+      if (ref.current) {
+        gsap.to(ref.current, {
+          y: '+=10',
+          duration: 5 + i * 0.5,
+          repeat: -1,
+          yoyo: true,
+          ease: 'sine.inOut',
+        });
+      }
+    });
+
+    // Scroll parallax (only content layer, very light)
     gsap.to(contentRef.current, {
-      yPercent: 30,
+      yPercent: 20,
       ease: 'none',
       scrollTrigger: {
         trigger: heroRef.current,
         start: 'top top',
         end: 'bottom top',
-        scrub: true
-      }
+        scrub: true,
+      },
     });
 
-    // Scrub the floating items slightly differently for vertical parallax depth!
-    floatingRefs.current.forEach((el, index) => {
-      if (el) {
-        const speed = (index + 1) * 30; // different speeds for layered depth
-        gsap.to(el, {
-          y: `-=${speed}`,
-          ease: 'none',
-          scrollTrigger: {
-            trigger: heroRef.current,
-            start: 'top top',
-            end: 'bottom top',
-            scrub: true
+    // Mouse parallax — throttled with passive listener
+    let rafId = null;
+    let mouseX = 0, mouseY = 0;
+
+    const onMouseMove = (e) => {
+      mouseX = (e.clientX - window.innerWidth / 2) * 0.025;
+      mouseY = (e.clientY - window.innerHeight / 2) * 0.025;
+
+      if (!rafId) {
+        rafId = requestAnimationFrame(() => {
+          floatingRefs.current.forEach((el, i) => {
+            if (el) {
+              gsap.to(el, {
+                x: mouseX * (i + 1) * 0.35,
+                y: mouseY * (i + 1) * 0.25,
+                duration: 1.8,
+                ease: 'power2.out',
+                overwrite: 'auto',
+              });
+            }
+          });
+
+          if (teaCupRef.current) {
+            gsap.to(teaCupRef.current, {
+              x: mouseX * 0.2,
+              y: mouseY * 0.12,
+              duration: 2,
+              ease: 'power2.out',
+              overwrite: 'auto',
+            });
           }
+          if (coffeeCupRef.current) {
+            gsap.to(coffeeCupRef.current, {
+              x: mouseX * 0.25,
+              y: mouseY * 0.15,
+              duration: 2,
+              ease: 'power2.out',
+              overwrite: 'auto',
+            });
+          }
+
+          rafId = null;
         });
       }
-    });
-
-    // 5. Parallax effect linked to mouse movement
-    const handleMouseMove = (e) => {
-      const { clientX, clientY } = e;
-      const moveX = (clientX - window.innerWidth / 2) * 0.04;
-      const moveY = (clientY - window.innerHeight / 2) * 0.04;
-
-      floatingRefs.current.forEach((el, index) => {
-        if (el) {
-          const factor = (index + 1) * 0.45;
-          gsap.to(el, {
-            x: moveX * factor,
-            y: moveY * factor,
-            duration: 1.2,
-            ease: 'power2.out',
-            overwrite: 'auto'
-          });
-        }
-      });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener('mousemove', onMouseMove, { passive: true });
+    return () => {
+      window.removeEventListener('mousemove', onMouseMove);
+      if (rafId) cancelAnimationFrame(rafId);
+    };
   }, { scope: heroRef });
 
   return (
-    <section ref={heroRef} className="hero">
-      <HeroScene />
-      
-      <div className="hero-overlay"></div>
+    <section ref={heroRef} className="hero" id="hero-section">
+      {/* Three.js scene — lazy loaded after entrance animations */}
+      {showScene && (
+        <Suspense fallback={null}>
+          <HeroScene />
+        </Suspense>
+      )}
 
-      {/* Floating Elements Background Layer */}
+      <div className="hero-overlay" />
+
+      {/* Beverage Cups */}
+      <div className="hero-beverages">
+        <div className="hero-cup hero-cup-tea" ref={teaCupRef}>
+          <SteamEffect />
+          <img src="/images/hero/tea-cup.png" alt="Premium Palm Jaggery Tea" />
+        </div>
+        <div className="hero-cup hero-cup-coffee" ref={coffeeCupRef}>
+          <SteamEffect />
+          <img src="/images/hero/coffee-cup.png" alt="Premium Palm Jaggery Coffee" />
+        </div>
+      </div>
+
+      {/* Floating SVG Elements */}
       <div className="hero-floating-elements">
         <div className="floating-item element-jaggery" ref={el => floatingRefs.current[0] = el}>
           <div className="floating-inner" ref={el => floatingInnerRefs.current[0] = el}>
@@ -197,38 +280,44 @@ const Hero = () => {
           </div>
         </div>
       </div>
-      
+
+      {/* Central Content */}
       <div ref={contentRef} className="container hero-content">
         <div ref={logoRef} className="hero-logo-container">
-          <div className="hero-logo-glow"></div>
-          <img src="/images/Logo/logo-badge.png" alt="Sarvana Thati Bellam" className="hero-main-logo" />
+          <div className="hero-logo-glow" />
+          <div className="hero-logo-ring" />
+          <div className="hero-logo-ring-outer" />
+          <img src="/images/Logo/Sarvana_Logo.png" alt="Sarvana Thati Bellam" className="hero-main-logo" />
         </div>
-        
-        <div ref={titleRef} className="hero-text">
-          <h1 className="hero-title">
-            <span className="block hero-title-line">
-              {"Sweetened by Nature,".split(" ").map((word, i) => (
-                <span key={i} className="word-wrapper">
-                  <span className="animated-word">{word}&nbsp;</span>
-                </span>
-              ))}
-            </span>
-            <span className="block hero-title-line text-accent">
-              {"Brewed with Love".split(" ").map((word, i) => (
-                <span key={i} className="word-wrapper">
-                  <span className="animated-word">{word}&nbsp;</span>
-                </span>
-              ))}
-            </span>
-          </h1>
-          <p className="hero-subtitle">
-            Premium Tea, Coffee & Snacks crafted with the traditional goodness of pure Palm Jaggery
-          </p>
-        </div>
-        
-        <div ref={buttonsRef} className="hero-buttons">
-          <Button variant="primary" size="lg" href="/products">Explore Products</Button>
-          <Button variant="secondary" size="lg" href="/about">Our Story</Button>
+
+        <div ref={glassPanelRef} className="hero-glass-panel">
+          <div className="hero-text">
+            <h1 className="hero-title">
+              <span className="block hero-title-line">
+                {"Sweetened by Nature,".split(" ").map((word, i) => (
+                  <span key={i} className="word-wrapper">
+                    <span className="animated-word">{word}&nbsp;</span>
+                  </span>
+                ))}
+              </span>
+              <span className="block hero-title-line text-accent">
+                {"Brewed with Love".split(" ").map((word, i) => (
+                  <span key={i} className="word-wrapper">
+                    <span className="animated-word">{word}&nbsp;</span>
+                  </span>
+                ))}
+              </span>
+            </h1>
+            <div className="hero-divider" />
+            <p className="hero-subtitle">
+              Premium Tea, Coffee & Snacks crafted with the traditional goodness of pure Palm Jaggery
+            </p>
+          </div>
+
+          <div ref={buttonsRef} className="hero-buttons">
+            <Button variant="primary" size="lg" href="/products">Explore Products</Button>
+            <Button variant="secondary" size="lg" href="/about">Our Story</Button>
+          </div>
         </div>
       </div>
 

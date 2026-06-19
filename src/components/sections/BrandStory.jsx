@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
+import { cinematicReveal, goldenLineReveal } from '../../utils/gsapAnimations';
 import { useStaggerReveal, useScrollReveal } from '../../hooks/useGSAPAnimations';
 import SectionTitle from '../ui/SectionTitle';
 import AnimatedCounter from '../ui/AnimatedCounter';
@@ -17,6 +18,15 @@ const BrandStory = () => {
   useScrollReveal(imageRef);
 
   useGSAP(() => {
+    // Cinematic reveal for whole section
+    cinematicReveal(containerRef.current, containerRef.current);
+
+    // Golden divider lines
+    const dividers = containerRef.current.querySelectorAll('.story-golden-divider');
+    dividers.forEach((el) => {
+      goldenLineReveal(el, el, 0.2);
+    });
+
     if (leafRef.current) {
       gsap.to(leafRef.current, {
         yPercent: -30,
@@ -83,9 +93,11 @@ const BrandStory = () => {
               <p className="reveal-text">
                 For generations, Thati Bellam (Palm Jaggery) has been the heart of South Indian wellness. Extracted meticulously from the sap of the Palmyra palm tree, it is an artisanal craft passed down through centuries.
               </p>
+              <div className="story-golden-divider" />
               <p className="reveal-text">
                 Unlike refined sugar, our Thati Bellam retains its natural minerals—rich in iron, calcium, and potassium. It lends a deep, caramel-like earthiness to our teas and coffees, transforming every sip into a moment of pure, traditional indulgence.
               </p>
+              <div className="story-golden-divider" />
               <p className="reveal-text">
                 At Sarvana, we source directly from traditional tappers, ensuring that the age-old methods are preserved, and only the highest quality jaggery reaches your cup.
               </p>

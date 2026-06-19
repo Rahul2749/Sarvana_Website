@@ -1,24 +1,26 @@
 import Hero from '../components/hero/Hero';
-import BrandStory from '../components/sections/BrandStory';
+import HeritageStory from '../components/sections/HeritageStory';
 import ProcessJourney from '../components/sections/ProcessJourney';
 import ProductCarousel from '../components/products/ProductCarousel';
 import Benefits from '../components/sections/Benefits';
 import SugarComparison from '../components/sections/SugarComparison';
-import ProductGrid from '../components/products/ProductGrid';
+import ProductShowcase from '../components/products/ProductShowcase';
 import ReviewsWall from '../components/sections/ReviewsWall';
 import Gallery from '../components/sections/Gallery';
 import QuickContact from '../components/sections/QuickContact';
+import BackgroundParticles from '../components/ui/BackgroundParticles';
 
 const Home = () => {
   return (
     <div className="page home-page">
+      <BackgroundParticles />
       <Hero />
-      <BrandStory />
+      <HeritageStory />
       <ProcessJourney />
       <ProductCarousel />
       <Benefits />
       <SugarComparison />
-      <ProductGrid />
+      <ProductShowcase />
       <ReviewsWall />
       <Gallery />
       <QuickContact />

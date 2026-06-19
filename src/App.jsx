@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -23,6 +23,7 @@ gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const AppContent = () => {
   const [loading, setLoading] = useState(true);
+  const [contentReady, setContentReady] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -45,7 +46,7 @@ const AppContent = () => {
       lenis.raf(time * 1000);
     });
 
-    gsap.ticker.lagSmoothing(0);
+    gsap.ticker.lagSmoothing(500, 33);
 
     // Simulate initial loading
     const timer = setTimeout(() => {
@@ -59,13 +60,22 @@ const AppContent = () => {
     };
   }, []);
 
+  // Mount content on next frame after loader finishes to avoid jank
+  useEffect(() => {
+    if (!loading && !contentReady) {
+      requestAnimationFrame(() => {
+        setContentReady(true);
+      });
+    }
+  }, [loading, contentReady]);
+
   return (
     <>
       <AnimatePresence>
         {loading && <Loader onComplete={() => setLoading(false)} />}
       </AnimatePresence>
 
-      {!loading && (
+      {contentReady && (
         <div className="app-container">
           <ScrollToTop />
           <Navbar />

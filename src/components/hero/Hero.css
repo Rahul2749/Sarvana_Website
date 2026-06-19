@@ -1,3 +1,7 @@
+/* ============================================================
+   HERO SECTION — Premium Luxury Cinematic Design
+   ============================================================ */
+
 .hero {
   position: relative;
   min-height: 100vh;
@@ -5,61 +9,117 @@
   align-items: center;
   justify-content: center;
   overflow: hidden;
-  background-color: var(--color-primary);
-  background-image: radial-gradient(circle at 50% 50%, var(--color-primary-light) 0%, var(--color-primary) 100%);
+  background-color: var(--color-primary-dark);
+  background-image:
+    radial-gradient(ellipse at 30% 20%, rgba(74, 46, 28, 0.5) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 80%, rgba(61, 36, 23, 0.3) 0%, transparent 50%),
+    radial-gradient(circle at 50% 40%, var(--color-primary-light) 0%, var(--color-primary) 50%, var(--color-primary-dark) 100%);
 }
 
+/* Multi-layer overlay */
 .hero-overlay {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(26, 15, 10, 0.3) 0%, rgba(26, 15, 10, 0.8) 100%);
+  background:
+    linear-gradient(180deg,
+      rgba(26, 15, 10, 0.25) 0%,
+      rgba(26, 15, 10, 0.0) 40%,
+      rgba(26, 15, 10, 0.15) 70%,
+      rgba(26, 15, 10, 0.5) 100%
+    );
   z-index: 1;
+  pointer-events: none;
 }
 
+/* ─── Central Content ─── */
 .hero-content {
   position: relative;
-  z-index: 2;
+  z-index: 3;
   text-align: center;
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding-top: var(--spacing-4xl);
+  padding-top: clamp(60px, 9vh, 90px);
+  padding-bottom: var(--spacing-sm);
+  max-width: 760px;
+  will-change: transform;
 }
 
+/* No card — just transparent container for the text */
+.hero-glass-panel {
+  position: relative;
+  padding: clamp(8px, 1.5vw, 16px) clamp(16px, 3vw, 32px);
+}
+
+/* ─── Logo ─── */
 .hero-logo-container {
   position: relative;
-  margin-bottom: var(--spacing-xl);
-  max-width: 160px;
-  width: 50%;
+  margin-bottom: var(--spacing-md);
+  width: clamp(100px, 14vw, 140px);
   aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: pointer;
+  will-change: transform;
+}
+
+.hero-logo-container:hover {
+  transform: rotateY(8deg) rotateX(-5deg) scale(1.06);
 }
 
 .hero-main-logo {
   width: 100%;
   height: 100%;
   object-fit: contain;
-  filter: drop-shadow(0 8px 30px rgba(200, 148, 62, 0.4));
-  border-radius: 50%;
+  filter: drop-shadow(0 8px 35px rgba(200, 148, 62, 0.5));
+  position: relative;
+  z-index: 2;
 }
 
+/* Golden glow behind logo */
 .hero-logo-glow {
   position: absolute;
-  top: -10px;
-  left: -10px;
-  right: -10px;
-  bottom: -10px;
+  top: -18px;
+  left: -18px;
+  right: -18px;
+  bottom: -18px;
   border-radius: 50%;
-  border: 1px dashed rgba(200, 148, 62, 0.5);
-  animation: rotate 20s infinite linear;
+  background: radial-gradient(circle, rgba(217, 180, 74, 0.18) 0%, transparent 70%);
+  animation: goldenPulse 4s ease-in-out infinite;
   pointer-events: none;
 }
 
+/* Rotating dashed golden ring */
+.hero-logo-ring {
+  position: absolute;
+  top: -14px;
+  left: -14px;
+  right: -14px;
+  bottom: -14px;
+  border-radius: 50%;
+  border: 1.5px dashed rgba(200, 148, 62, 0.35);
+  animation: goldenRingRotate 25s infinite linear;
+  pointer-events: none;
+}
+
+.hero-logo-ring-outer {
+  position: absolute;
+  top: -24px;
+  left: -24px;
+  right: -24px;
+  bottom: -24px;
+  border-radius: 50%;
+  border: 1px dotted rgba(200, 148, 62, 0.15);
+  animation: goldenRingRotate 40s infinite linear reverse;
+  pointer-events: none;
+}
+
+/* ─── Title ─── */
 .word-wrapper {
   display: inline-block;
   overflow: hidden;
@@ -70,18 +130,22 @@
   display: inline-block;
   transform: translateY(100%);
   opacity: 0;
+  will-change: transform, opacity;
 }
 
 .hero-text {
-  margin-bottom: var(--spacing-xl);
+  margin-bottom: var(--spacing-md);
 }
 
 .hero-title {
   color: var(--color-white);
-  font-size: clamp(2.5rem, 6vw, 5rem);
-  line-height: 1.1;
-  margin-bottom: var(--spacing-lg);
-  text-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 5vw, 4.2rem);
+  font-weight: 700;
+  line-height: 1.15;
+  margin-bottom: var(--spacing-sm);
+  text-shadow: 0 4px 25px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
+  letter-spacing: -0.02em;
 }
 
 .block {
@@ -92,50 +156,93 @@
   color: var(--color-accent);
   font-family: var(--font-accent);
   font-style: italic;
+  font-weight: 500;
+  font-size: 1.1em;
+  letter-spacing: 0.01em;
 }
 
 .hero-subtitle {
-  color: var(--color-text-light);
-  font-size: clamp(1rem, 2vw, 1.25rem);
-  max-width: 600px;
+  color: rgba(245, 232, 212, 0.75);
+  font-family: var(--font-body);
+  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
+  font-weight: 300;
+  max-width: 460px;
   margin: 0 auto;
-  opacity: 0.9;
+  line-height: 1.75;
+  letter-spacing: 0.4px;
 }
 
+/* Golden divider */
+.hero-divider {
+  width: 50px;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--color-accent), transparent);
+  margin: var(--spacing-xs) auto var(--spacing-sm);
+  opacity: 0.4;
+}
+
+/* ─── Buttons ─── */
 .hero-buttons {
   display: flex;
   gap: var(--spacing-md);
   flex-wrap: wrap;
   justify-content: center;
+  margin-top: var(--spacing-xs);
 }
 
-.scroll-indicator {
+/* ─── Beverage Cups ─── */
+.hero-beverages {
   position: absolute;
-  bottom: var(--spacing-xl);
-  left: 50%;
-  transform: translateX(-50%);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
   z-index: 2;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  color: var(--color-accent);
-  opacity: 0.8;
+  overflow: hidden;
 }
 
-.scroll-text {
-  font-size: var(--text-sm);
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  margin-bottom: var(--spacing-xs);
-  font-family: var(--font-accent);
+.hero-cup {
+  position: absolute;
+  width: clamp(130px, 15vw, 230px);
+  will-change: transform;
 }
 
-.scroll-arrow {
-  font-size: var(--text-xl);
-  animation: float 2s infinite ease-in-out;
+.hero-cup img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  border-radius: var(--radius-lg);
 }
 
-/* Floating Elements Styling */
+/* Blend cup edges into dark background */
+.hero-cup::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: var(--radius-lg);
+  box-shadow:
+    inset 0 0 35px 25px rgba(26, 15, 10, 0.85),
+    0 15px 40px rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+}
+
+.hero-cup-tea {
+  left: 1%;
+  top: 50%;
+  transform: translateY(-50%) perspective(800px) rotateY(5deg);
+}
+
+.hero-cup-coffee {
+  right: 1%;
+  top: 50%;
+  transform: translateY(-50%) perspective(800px) rotateY(-5deg);
+}
+
+/* ─── Floating SVG Elements ─── */
 .hero-floating-elements {
   position: absolute;
   top: 0;
@@ -150,7 +257,7 @@
 .floating-item {
   position: absolute;
   pointer-events: none;
-  transition: transform 0.1s ease-out;
+  will-change: transform;
 }
 
 .floating-inner {
@@ -165,49 +272,132 @@
   width: 100%;
   height: 100%;
   object-fit: contain;
-  mix-blend-mode: screen;
-  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6)) contrast(1.1) brightness(1.05);
+  filter: drop-shadow(0 12px 25px rgba(0, 0, 0, 0.5)) brightness(0.85);
+  opacity: 0.5;
 }
 
 .floating-svg {
   width: 100%;
   height: 100%;
-  filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.5));
+  filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.4));
+  opacity: 0.45;
 }
 
-/* Specific Placements and Sizing */
+/* Push floating elements further to edges so they don't overlap cups */
 .element-jaggery {
-  left: 8%;
-  top: 15%;
-  width: clamp(80px, 12vw, 130px);
+  left: 22%;
+  top: 10%;
+  width: clamp(45px, 5vw, 70px);
   aspect-ratio: 1;
 }
 
 .element-coffee {
-  right: 8%;
-  top: 18%;
-  width: clamp(70px, 10vw, 110px);
+  right: 22%;
+  top: 12%;
+  width: clamp(40px, 4.5vw, 60px);
   aspect-ratio: 1;
 }
 
 .element-leaf {
-  left: 12%;
-  bottom: 22%;
-  width: clamp(65px, 9vw, 100px);
+  left: 24%;
+  bottom: 15%;
+  width: clamp(40px, 4.5vw, 60px);
   aspect-ratio: 1;
 }
 
 .element-cardamom {
-  right: 12%;
-  bottom: 24%;
-  width: clamp(60px, 8vw, 90px);
+  right: 24%;
+  bottom: 18%;
+  width: clamp(35px, 4vw, 55px);
   aspect-ratio: 1;
 }
 
-/* Responsive adjustments */
+/* ─── Scroll Indicator ─── */
+.scroll-indicator {
+  position: absolute;
+  bottom: clamp(12px, 2.5vh, 24px);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+.scroll-text {
+  font-size: 0.65rem;
+  text-transform: uppercase;
+  letter-spacing: 3px;
+  font-family: var(--font-body);
+  font-weight: 300;
+  color: rgba(217, 180, 74, 0.4);
+}
+
+.scroll-arrow {
+  font-size: 1rem;
+  animation: scrollBounce 2.5s infinite ease-in-out;
+  color: rgba(217, 180, 74, 0.4);
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+
+@media (max-width: 1200px) {
+  .hero-cup {
+    width: clamp(110px, 13vw, 180px);
+  }
+  .element-jaggery { left: 20%; }
+  .element-coffee { right: 20%; }
+  .element-leaf { left: 20%; }
+  .element-cardamom { right: 20%; }
+}
+
+@media (max-width: 1024px) {
+  .hero-cup {
+    width: clamp(100px, 12vw, 150px);
+    opacity: 0.65;
+  }
+}
+
 @media (max-width: 768px) {
-  .element-jaggery { left: 4%; top: 12%; }
-  .element-coffee { right: 4%; top: 14%; }
-  .element-leaf { left: 6%; bottom: 18%; }
-  .element-cardamom { right: 6%; bottom: 20%; }
+  .hero-content {
+    padding-top: clamp(60px, 12vh, 90px);
+  }
+
+  .hero-beverages {
+    display: none;
+  }
+
+  .floating-item {
+    opacity: 0.25;
+  }
+
+  .element-jaggery { left: 5%; top: 14%; width: clamp(40px, 8vw, 55px); }
+  .element-coffee { right: 5%; top: 16%; width: clamp(35px, 7vw, 50px); }
+  .element-leaf { left: 8%; bottom: 20%; width: clamp(35px, 7vw, 50px); }
+  .element-cardamom { right: 8%; bottom: 22%; width: clamp(30px, 6vw, 45px); }
+
+  .hero-logo-container {
+    width: clamp(90px, 25vw, 120px);
+  }
+
+  .hero-title {
+    font-size: clamp(1.8rem, 7vw, 3rem);
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-floating-elements {
+    display: none;
+  }
+
+  .hero-title {
+    font-size: clamp(1.6rem, 8vw, 2.5rem);
+  }
+
+  .hero-subtitle {
+    font-size: 0.85rem;
+  }
 }

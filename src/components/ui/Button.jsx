@@ -1,3 +1,4 @@
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import './Button.css';
 
@@ -11,24 +12,42 @@ const Button = ({
   disabled = false,
   ...props
 }) => {
+  const btnRef = useRef(null);
   const classes = `btn btn-${variant} btn-${size} ${className}`;
+
+  const handleMouseMove = (e) => {
+    if (!btnRef.current) return;
+    const rect = btnRef.current.getBoundingClientRect();
+    const x = e.clientX - rect.left;
+    const y = e.clientY - rect.top;
+    btnRef.current.style.setProperty('--mouse-x', `${x}px`);
+    btnRef.current.style.setProperty('--mouse-y', `${y}px`);
+  };
 
   if (href) {
     return (
-      <Link to={href} className={classes} {...props}>
-        {children}
+      <Link
+        ref={btnRef}
+        to={href}
+        className={classes}
+        onMouseMove={handleMouseMove}
+        {...props}
+      >
+        <span className="btn-content">{children}</span>
       </Link>
     );
   }
 
   return (
     <button 
+      ref={btnRef}
       className={classes} 
       onClick={onClick} 
       disabled={disabled}
+      onMouseMove={handleMouseMove}
       {...props}
     >
-      {children}
+      <span className="btn-content">{children}</span>
     </button>
   );
 };
