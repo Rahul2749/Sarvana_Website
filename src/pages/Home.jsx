@@ -5,7 +5,7 @@ import ProductCarousel from '../components/products/ProductCarousel';
 import Benefits from '../components/sections/Benefits';
 import SugarComparison from '../components/sections/SugarComparison';
 import ProductShowcase from '../components/products/ProductShowcase';
-import ReviewsWall from '../components/sections/ReviewsWall';
+import LuxuryTestimonials from '../components/sections/LuxuryTestimonials';
 import Gallery from '../components/sections/Gallery';
 import QuickContact from '../components/sections/QuickContact';
 import BackgroundParticles from '../components/ui/BackgroundParticles';
@@ -21,7 +21,7 @@ const Home = () => {
       <Benefits />
       <SugarComparison />
       <ProductShowcase />
-      <ReviewsWall />
+      <LuxuryTestimonials />
       <Gallery />
       <QuickContact />
     </div>
