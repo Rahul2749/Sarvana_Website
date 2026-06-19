@@ -18,7 +18,7 @@
 
 .footer-logo {
   display: inline-block; /* Helps with centering */
-  height: 50px;
+  height: clamp(60px, 15vw, 100px); /* Larger logo */
   margin-bottom: var(--spacing-md);
 }
 
@@ -72,13 +72,14 @@
 
 .footer-logo {
   display: block;
-  height: 60px;
+  height: clamp(80px, 8vw, 120px);
   margin-bottom: var(--spacing-md);
 }
 
 .footer-logo img {
   height: 100%;
   width: auto;
+  filter: drop-shadow(0 4px 12px rgba(217, 180, 74, 0.3));
 }
 
 .footer-description {

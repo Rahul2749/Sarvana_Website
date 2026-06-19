@@ -367,7 +367,21 @@
   }
 
   .hero-beverages {
-    display: none;
+    /* Keep visible on mobile, just reduce opacity and z-index to not block text */
+    opacity: 0.6;
+    z-index: 0;
+  }
+  
+  .hero-cup {
+    width: clamp(70px, 18vw, 110px);
+  }
+  
+  .hero-cup-tea {
+    left: -2%;
+  }
+  
+  .hero-cup-coffee {
+    right: -2%;
   }
 
   .floating-item {
@@ -390,8 +404,13 @@
 
 @media (max-width: 480px) {
   .hero-floating-elements {
-    display: none;
+    opacity: 0.5;
   }
+  
+  .element-jaggery { left: 2%; top: 12%; width: clamp(25px, 6vw, 35px); }
+  .element-coffee { right: 2%; top: 15%; width: clamp(20px, 5vw, 30px); }
+  .element-leaf { left: 2%; bottom: 25%; width: clamp(20px, 5vw, 30px); }
+  .element-cardamom { right: 2%; bottom: 28%; width: clamp(15px, 4vw, 25px); }
 
   .hero-title {
     font-size: clamp(1.6rem, 8vw, 2.5rem);
