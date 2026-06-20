@@ -1,6 +1,9 @@
 import Hero from '../components/hero/Hero';
 import HeritageStory from '../components/sections/HeritageStory';
 import Franchise from '../components/sections/Franchise';
+import ProcessJourney from '../components/sections/ProcessJourney';
+import OutletOptions from '../components/sections/OutletOptions';
+import InvestmentProcess from '../components/sections/InvestmentProcess';
 import ProductCarousel from '../components/products/ProductCarousel';
 import Benefits from '../components/sections/Benefits';
 import SugarComparison from '../components/sections/SugarComparison';
@@ -18,6 +21,9 @@ const Home = () => {
       <Hero />
       <HeritageStory />
       <Franchise />
+      <ProcessJourney />
+      <OutletOptions />
+      <InvestmentProcess />
       <ProductCarousel />
       <Benefits />
       <SugarComparison />
