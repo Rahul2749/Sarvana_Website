@@ -114,7 +114,7 @@ const HeritageStory = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="heritage-section">
+    <section ref={containerRef} id="about" className="heritage-section">
       <div className="heritage-container">
         
         {/* Left Side: Text Content */}

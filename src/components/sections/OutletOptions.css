@@ -1,0 +1,106 @@
+.outlet-options {
+  background-color: var(--bg);
+  padding: var(--spacing-4xl) 0;
+  position: relative;
+}
+
+.outlet-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: var(--spacing-2xl);
+  margin-top: var(--spacing-3xl);
+}
+
+@media (min-width: 768px) {
+  .outlet-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.outlet-card {
+  background: var(--color-surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: var(--spacing-2xl);
+  text-align: center;
+  transition: all var(--transition-normal);
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+@media (prefers-color-scheme: dark) {
+  .outlet-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(250, 243, 232, 0.1);
+  }
+}
+
+.outlet-card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow);
+  border-color: var(--color-accent);
+}
+
+.outlet-icon {
+  width: 60px;
+  height: 60px;
+  margin: 0 auto var(--spacing-xl);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--accent-bg);
+  color: var(--color-accent);
+  border-radius: 50%;
+}
+
+.outlet-icon svg {
+  width: 30px;
+  height: 30px;
+}
+
+.outlet-card h3 {
+  font-family: var(--font-display);
+  color: var(--text-h);
+  font-size: 1.5rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.outlet-card p {
+  color: var(--text);
+  margin-bottom: var(--spacing-lg);
+  font-family: var(--font-body);
+}
+
+.outlet-details {
+  list-style: none;
+  padding: 0;
+  margin: auto 0 0 0;
+  text-align: left;
+}
+
+.outlet-details li {
+  padding: 8px 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+  color: var(--text);
+  display: flex;
+  justify-content: space-between;
+}
+
+@media (prefers-color-scheme: dark) {
+  .outlet-details li {
+    border-bottom-color: rgba(250, 243, 232, 0.1);
+  }
+}
+
+.outlet-details li:last-child {
+  border-bottom: none;
+}
+
+.outlet-details strong {
+  color: var(--text-h);
+  font-weight: 500;
+}

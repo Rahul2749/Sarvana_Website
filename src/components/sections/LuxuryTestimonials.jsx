@@ -63,7 +63,7 @@ const LuxuryTestimonials = () => {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className="luxury-testimonials">
+    <section ref={sectionRef} id="stories" className="luxury-testimonials">
       <Suspense fallback={null}>
         <ShowcaseParticles />
       </Suspense>

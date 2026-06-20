@@ -46,7 +46,7 @@ const QuickContact = () => {
   }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="quick-contact section">
+    <section ref={containerRef} id="contact" className="quick-contact section">
       {/* Decorative background items */}
       <div className="section-decor decor-left-bottom" ref={leftDecorRef}>
         <img src="/images/decor/decor-coffee-cup.png" alt="Coffee" className="floating-img-decor" />

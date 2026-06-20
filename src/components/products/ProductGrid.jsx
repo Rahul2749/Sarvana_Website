@@ -1,4 +1,5 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { useGSAP } from '@gsap/react';
 import { cardEmerge } from '../../utils/gsapAnimations';
 import SectionTitle from '../ui/SectionTitle';
@@ -8,10 +9,31 @@ import { products } from '../../data/products';
 import './ProductGrid.css';
 
 const ProductGrid = () => {
-  const [activeFilter, setActiveFilter] = useState('All');
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const initialCategory = searchParams.get('category') || 'All';
+  
+  const [activeFilter, setActiveFilter] = useState(initialCategory);
   const gridRef = useRef(null);
+  const sectionRef = useRef(null);
 
   const filters = ['All', 'Tea', 'Coffee', 'Snacks'];
+
+  useEffect(() => {
+    const category = searchParams.get('category');
+    if (category && filters.includes(category)) {
+      setActiveFilter(category);
+      
+      // Smooth scroll to the section if navigating from a submenu
+      if (sectionRef.current) {
+        setTimeout(() => {
+          sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }, 150);
+      }
+    } else {
+      setActiveFilter('All');
+    }
+  }, [location.search]);
 
   const filteredProducts = activeFilter === 'All' 
     ? products.slice(0, 8) 
@@ -28,7 +50,7 @@ const ProductGrid = () => {
   }, { scope: gridRef, dependencies: [activeFilter] });
 
   return (
-    <section className="section product-grid-section">
+    <section ref={sectionRef} className="section product-grid-section">
       <div className="container">
         <SectionTitle 
           subtitle="Our Collection" 

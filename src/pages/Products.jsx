@@ -5,14 +5,9 @@ import './Products.css';
 const Products = () => {
   return (
     <div className="page products-page">
-      <div className="page-header">
+      <div className="page-header-minimal">
         <div className="container">
-          <SectionTitle 
-            subtitle="Our Shop" 
-            title="Taste the Tradition" 
-            description="Explore our complete collection of premium teas, coffees, and traditional snacks, all sweetened naturally with Thati Bellam."
-            light={true}
-          />
+          <h1 className="minimal-title">Our Shop</h1>
         </div>
       </div>
       

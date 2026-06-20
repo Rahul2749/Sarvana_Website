@@ -1,27 +1,19 @@
 .product-carousel-section {
   width: 100%;
-  height: 100vh;
   background-color: var(--color-surface-alt);
-  overflow: hidden;
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
+  padding: var(--spacing-4xl) 0;
 }
 
 .carousel-header {
-  position: absolute;
-  top: var(--spacing-xl);
-  left: 50%;
-  transform: translateX(-50%);
   text-align: center;
-  z-index: 10;
   width: 100%;
+  margin-bottom: var(--spacing-3xl);
 }
 
 .carousel-title {
   font-family: var(--font-display);
-  font-size: clamp(2rem, 5vw, 4rem);
+  font-size: clamp(2rem, 5vw, 3.5rem);
   color: var(--color-primary);
   margin-bottom: var(--spacing-xs);
 }
@@ -34,19 +26,29 @@
 }
 
 .carousel-wrapper {
-  display: flex;
-  width: 300vw; /* 3 panels * 100vw */
-  height: 70vh;
-  margin-top: 5vh;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: var(--spacing-2xl);
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 var(--spacing-xl);
+}
+
+@media (min-width: 768px) {
+  .carousel-wrapper {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-wrapper {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }
 
 .carousel-panel {
-  width: 100vw;
+  width: 100%;
   height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 var(--spacing-xl);
 }
 
 .panel-content {
@@ -55,59 +57,30 @@
   -webkit-backdrop-filter: blur(12px);
   border-radius: var(--radius-xl);
   overflow: hidden;
-  box-shadow: var(--shadow-xl);
+  box-shadow: var(--shadow-md);
   border: 1px solid rgba(200, 148, 62, 0.22);
   width: 100%;
-  max-width: 1200px;
   height: 100%;
-  max-height: 600px;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-content:hover {
+  transform: translateY(-8px);
+  box-shadow: var(--shadow-lg);
 }
 
 .panel-content-inner {
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: center;
-  overflow: hidden;
-}
-
-.panel-text {
-  flex: 1;
-  padding: var(--spacing-3xl);
-  position: relative;
-}
-
-.panel-number {
-  font-family: var(--font-display);
-  font-size: var(--text-7xl);
-  opacity: 0.1;
-  position: absolute;
-  top: var(--spacing-xl);
-  left: var(--spacing-xl);
-  font-weight: 700;
-  line-height: 1;
-  pointer-events: none;
-}
-
-.panel-text h3 {
-  font-size: var(--text-5xl);
-  margin-bottom: var(--spacing-md);
-  position: relative;
-  z-index: 1;
-}
-
-.panel-text p {
-  font-size: var(--text-lg);
-  color: var(--color-text-muted);
-  margin-bottom: var(--spacing-xl);
-  max-width: 400px;
-  position: relative;
-  z-index: 1;
+  flex-direction: column;
 }
 
 .panel-image-container {
-  flex: 1;
-  height: 100%;
+  width: 100%;
+  height: 250px;
   position: relative;
   overflow: hidden;
 }
@@ -118,7 +91,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  opacity: 0.2;
+  opacity: 0.25;
   mix-blend-mode: multiply;
   z-index: 1;
   transition: opacity var(--transition-normal);
@@ -139,20 +112,43 @@
   transform: scale(1.05);
 }
 
-@media (max-width: 1024px) {
-  .panel-content-inner {
-    flex-direction: column-reverse;
-  }
-  .panel-text {
-    padding: var(--spacing-xl);
-    flex: 0 0 auto;
-  }
-  .panel-text h3 {
-    font-size: var(--text-3xl);
-  }
-  .panel-number {
-    font-size: var(--text-5xl);
-    top: var(--spacing-sm);
-    left: var(--spacing-sm);
-  }
+.panel-text {
+  padding: var(--spacing-2xl);
+  position: relative;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  background: linear-gradient(to bottom, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.panel-number {
+  font-family: var(--font-display);
+  font-size: var(--text-5xl);
+  opacity: 0.08;
+  position: absolute;
+  top: var(--spacing-md);
+  right: var(--spacing-xl);
+  font-weight: 700;
+  line-height: 1;
+  pointer-events: none;
+}
+
+.panel-text h3 {
+  font-size: var(--text-2xl);
+  margin-bottom: var(--spacing-sm);
+  position: relative;
+  z-index: 1;
+}
+
+.panel-text p {
+  font-size: 1rem;
+  color: var(--color-text-muted);
+  margin-bottom: var(--spacing-xl);
+  position: relative;
+  z-index: 1;
+  flex: 1;
+}
+
+.panel-text .btn {
+  align-self: flex-start;
 }

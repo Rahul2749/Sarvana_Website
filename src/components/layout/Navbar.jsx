@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollDirection } from '../../hooks/useScrollDirection';
 import { navigationLinks } from '../../data/navigation';
@@ -10,6 +10,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollDirection = useScrollDirection();
+  const location = useLocation();
   const navRef = useRef(null);
 
   // Track scroll position to toggle background opacity/blur
@@ -30,6 +31,21 @@ const Navbar = () => {
   const closeMenu = () => {
     setIsOpen(false);
     document.body.style.overflow = 'unset';
+  };
+
+  const handleLinkClick = (e, path) => {
+    if (path.startsWith('/#')) {
+      const hash = path.substring(1); // gets '#something'
+      const element = document.querySelector(hash);
+      if (element) {
+        e.preventDefault();
+        // Since Lenis is used, we can just use native scrollIntoView and Lenis might catch it, or just do smooth scroll
+        element.scrollIntoView({ behavior: 'smooth' });
+        // Update URL hash without jumping
+        window.history.pushState(null, '', path);
+      }
+    }
+    closeMenu();
   };
 
   // Framer Motion staggered variants for mobile menu
@@ -88,24 +104,65 @@ const Navbar = () => {
         }}
       >
         <div className="navbar-container">
-          <NavLink to="/" className="navbar-logo" onClick={closeMenu}>
+          <Link to="/" className="navbar-logo" onClick={closeMenu}>
             <img src="/images/Logo/logo.jpeg" alt="Sarvana" />
-          </NavLink>
+          </Link>
 
           <nav className="navbar-links desktop-only">
-            {navigationLinks.map((link) => (
-              <NavLink 
-                key={link.id} 
-                to={link.path}
-                className={({ isActive }) => isActive ? 'nav-link active' : 'nav-link'}
-              >
-                {link.label}
-              </NavLink>
-            ))}
+            {navigationLinks.map((link) => {
+              const linkHash = link.path.replace('/', '');
+              const isActive = location.hash === linkHash;
+              
+              if (link.submenus) {
+                return (
+                  <div key={link.id} className="nav-dropdown-container">
+                    <Link 
+                      to={link.path}
+                      className={isActive ? 'nav-link active' : 'nav-link'}
+                      onClick={(e) => handleLinkClick(e, link.path)}
+                    >
+                      {link.label}
+                      <svg className="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <polyline points="6 9 12 15 18 9"></polyline>
+                      </svg>
+                    </Link>
+                    <div className="nav-dropdown">
+                      {link.submenus.map(sub => (
+                        <Link 
+                          key={sub.id}
+                          to={sub.path}
+                          className="dropdown-link"
+                          onClick={(e) => handleLinkClick(e, sub.path)}
+                        >
+                          {sub.label}
+                        </Link>
+                      ))}
+                    </div>
+                  </div>
+                );
+              }
+
+              return (
+                <Link 
+                  key={link.id} 
+                  to={link.path}
+                  className={isActive ? 'nav-link active' : 'nav-link'}
+                  onClick={(e) => handleLinkClick(e, link.path)}
+                >
+                  {link.label}
+                </Link>
+              );
+            })}
           </nav>
 
           <div className="navbar-actions desktop-only">
-            <Button variant="primary" size="sm" href="/products">Order Now</Button>
+            <Button 
+              variant="primary" 
+              size="sm" 
+              href="/franchise"
+            >
+              Apply for Franchise
+            </Button>
           </div>
 
           <button className="hamburger-btn mobile-only" onClick={toggleMenu} aria-label="Menu">
@@ -148,21 +205,45 @@ const Navbar = () => {
               animate="open"
               exit="closed"
             >
-              {navigationLinks.map((link) => (
-                <motion.div key={link.id} variants={itemVariants}>
-                  <NavLink 
-                    to={link.path}
-                    className={({ isActive }) => isActive ? 'mobile-link active' : 'mobile-link'}
-                    onClick={closeMenu}
-                  >
-                    {link.label}
-                  </NavLink>
-                </motion.div>
-              ))}
+              {navigationLinks.map((link) => {
+                const linkHash = link.path.replace('/', '');
+                const isActive = location.hash === linkHash;
+                
+                return (
+                  <motion.div key={link.id} variants={itemVariants} className="mobile-link-container">
+                    <Link 
+                      to={link.path}
+                      className={isActive ? 'mobile-link active' : 'mobile-link'}
+                      onClick={(e) => handleLinkClick(e, link.path)}
+                    >
+                      {link.label}
+                    </Link>
+                    {link.submenus && (
+                      <div className="mobile-submenus">
+                        {link.submenus.map(sub => (
+                          <Link
+                            key={sub.id}
+                            to={sub.path}
+                            className="mobile-sublink"
+                            onClick={(e) => handleLinkClick(e, sub.path)}
+                          >
+                            {sub.label}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </motion.div>
+                );
+              })}
               <motion.div variants={itemVariants} className="w-full">
                 <div className="mobile-menu-actions">
-                  <Button variant="primary" size="lg" href="/products" onClick={closeMenu} className="w-full">
-                    Order Now
+                  <Button 
+                    variant="primary" 
+                    size="lg" 
+                    href="/franchise" 
+                    className="w-full"
+                  >
+                    Apply for Franchise
                   </Button>
                 </div>
               </motion.div>

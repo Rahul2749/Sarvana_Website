@@ -19,7 +19,7 @@ const Gallery = () => {
   useStaggerClipPathReveal(gridRef, '.gallery-item', 'bottom');
 
   return (
-    <section className="section gallery-section">
+    <section id="gallery" className="section gallery-section">
       <div className="container">
         <SectionTitle 
           subtitle="@sarvana_thati_bellam" 

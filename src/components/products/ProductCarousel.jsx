@@ -30,32 +30,15 @@ const categories = [
 
 const ProductCarousel = () => {
   const containerRef = useRef(null);
-  const wrapperRef = useRef(null);
-
-  useGSAP(() => {
-    const panels = gsap.utils.toArray('.carousel-panel');
-    
-    gsap.to(panels, {
-      xPercent: -100 * (panels.length - 1),
-      ease: 'none',
-      scrollTrigger: {
-        trigger: containerRef.current,
-        pin: true,
-        scrub: 1,
-        snap: 1 / (panels.length - 1),
-        end: () => `+=${wrapperRef.current.offsetWidth}`,
-      }
-    });
-  }, { scope: containerRef });
 
   return (
-    <section ref={containerRef} className="product-carousel-section">
+    <section ref={containerRef} id="menus" className="product-carousel-section">
       <div className="carousel-header">
         <h2 className="carousel-title">Explore Our Range</h2>
-        <p>Swipe to discover the magic of Thati Bellam</p>
+        <p>Discover the magic of Thati Bellam</p>
       </div>
       
-      <div ref={wrapperRef} className="carousel-wrapper">
+      <div className="carousel-wrapper">
         {categories.map((cat, index) => (
           <div key={cat.id} className="carousel-panel">
             <div className="panel-content">

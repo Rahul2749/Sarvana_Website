@@ -26,6 +26,15 @@ const Hero = () => {
     return () => clearTimeout(timer);
   }, []);
 
+  const handleHashClick = (e, hash) => {
+    const element = document.querySelector(hash);
+    if (element) {
+      e.preventDefault();
+      element.scrollIntoView({ behavior: 'smooth' });
+      window.history.pushState(null, '', `/${hash}`);
+    }
+  };
+
   useGSAP(() => {
     // Single clean timeline — no overlapping, sequential flow
     const tl = gsap.timeline({
@@ -310,18 +319,18 @@ const Hero = () => {
             </h1>
             <div className="hero-divider" />
             <p className="hero-subtitle">
-              Premium Tea, Coffee & Snacks crafted with the traditional goodness of pure Palm Jaggery
+              Premium Tea, Coffee & Snacks crafted with the traditional goodness of pure Palm Jaggery. Join our legacy by owning a franchise.
             </p>
           </div>
 
-          <div ref={buttonsRef} className="hero-buttons">
+          <div ref={buttonsRef} className="hero-buttons" style={{ position: 'relative', zIndex: 100, pointerEvents: 'auto' }}>
             <Button variant="primary" size="lg" href="/products">Explore Products</Button>
-            <Button variant="secondary" size="lg" href="/about">Our Story</Button>
+            <Button variant="secondary" size="lg" href="/franchise">Own a Franchise</Button>
           </div>
         </div>
       </div>
 
-      <div className="scroll-indicator">
+      <div className="scroll-indicator" style={{ pointerEvents: 'none' }}>
         <span className="scroll-text">Scroll to explore</span>
         <div className="scroll-arrow">↓</div>
       </div>

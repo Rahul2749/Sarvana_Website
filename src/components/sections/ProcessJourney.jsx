@@ -54,7 +54,7 @@ const ProcessJourney = () => {
   useScrollReveal(sectionRef);
 
   return (
-    <section ref={sectionRef} className="process-journey section">
+    <section ref={sectionRef} id="process" className="process-journey section">
       <div className="container">
         <SectionTitle 
           subtitle="Our Heritage"

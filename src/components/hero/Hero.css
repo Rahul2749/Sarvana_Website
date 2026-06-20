@@ -188,6 +188,9 @@
   flex-wrap: wrap;
   justify-content: center;
   margin-top: var(--spacing-xs);
+  position: relative;
+  z-index: 50;
+  pointer-events: auto;
 }
 
 /* ─── Beverage Cups ─── */

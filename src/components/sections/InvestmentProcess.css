@@ -1,0 +1,136 @@
+.investment-process {
+  background-color: var(--color-primary-dark);
+  color: var(--color-surface);
+  padding: var(--spacing-4xl) 0;
+  position: relative;
+  overflow: hidden;
+}
+
+.investment-process .section-title h2 {
+  color: var(--color-surface);
+}
+
+.investment-process .section-title p {
+  color: rgba(250, 243, 232, 0.7);
+}
+
+.investment-timeline {
+  margin-top: var(--spacing-3xl);
+  position: relative;
+  max-width: 800px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Vertical Line */
+.investment-timeline::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 20px;
+  width: 2px;
+  background: rgba(212, 175, 55, 0.2);
+}
+
+@media (min-width: 768px) {
+  .investment-timeline::before {
+    left: 50%;
+    transform: translateX(-50%);
+  }
+}
+
+.timeline-step {
+  display: flex;
+  position: relative;
+  margin-bottom: var(--spacing-2xl);
+  opacity: 1; /* GSAP will animate this */
+}
+
+.timeline-step:last-child {
+  margin-bottom: 0;
+}
+
+.step-marker {
+  position: absolute;
+  left: 20px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-primary-dark);
+  border: 2px solid var(--color-accent);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+  z-index: 2;
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+}
+
+.timeline-step:hover .step-marker {
+  background: var(--color-accent);
+  color: var(--color-primary-dark);
+  box-shadow: 0 0 15px rgba(212, 175, 55, 0.4);
+}
+
+.step-content {
+  margin-left: 60px;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(250, 243, 232, 0.1);
+  padding: var(--spacing-xl);
+  border-radius: 8px;
+  width: calc(100% - 60px);
+  transition: all 0.3s ease;
+}
+
+.timeline-step:hover .step-content {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(212, 175, 55, 0.3);
+  transform: translateY(-3px);
+}
+
+.step-content h3 {
+  color: var(--color-accent);
+  font-family: var(--font-display);
+  font-size: 1.3rem;
+  margin-bottom: var(--spacing-sm);
+}
+
+.step-content p {
+  color: rgba(250, 243, 232, 0.8);
+  font-size: 0.95rem;
+  line-height: 1.5;
+}
+
+@media (min-width: 768px) {
+  .step-marker {
+    left: 50%;
+  }
+
+  .step-content {
+    width: 45%;
+    margin-left: 0;
+  }
+
+  /* Even steps go to the right */
+  .timeline-step:nth-child(even) {
+    justify-content: flex-end;
+  }
+
+  .timeline-step:nth-child(even) .step-content {
+    text-align: left;
+  }
+
+  /* Odd steps go to the left */
+  .timeline-step:nth-child(odd) {
+    justify-content: flex-start;
+  }
+
+  .timeline-step:nth-child(odd) .step-content {
+    text-align: right;
+  }
+}
