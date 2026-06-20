@@ -1,9 +1,28 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
+import fs from 'fs'
 
-// https://vite.dev/config/
+// Custom plugin to copy index.html to 404.html for GitHub Pages SPA routing
+const copyIndexTo404 = () => {
+  return {
+    name: 'copy-index-to-404',
+    closeBundle() {
+      if (fs.existsSync('dist/index.html')) {
+        fs.copyFileSync('dist/index.html', 'dist/404.html');
+      }
+    }
+  }
+}
+
+// Automatically detect hosting environment
+const isVercel = process.env.VERCEL === '1';
+const isNetlify = process.env.NETLIFY === 'true';
+// Assume GitHub Pages if production and not Vercel/Netlify
+const isGitHubPages = process.env.NODE_ENV === 'production' && !isVercel && !isNetlify;
+
 export default defineConfig({
-  plugins: [react()],
+  plugins: [react(), copyIndexTo404()],
+  base: isGitHubPages ? '/Sarvana_Website/' : '/',
   build: {
     chunkSizeWarningLimit: 1000,
     rollupOptions: {

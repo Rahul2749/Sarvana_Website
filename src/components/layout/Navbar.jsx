@@ -42,7 +42,8 @@ const Navbar = () => {
         // Since Lenis is used, we can just use native scrollIntoView and Lenis might catch it, or just do smooth scroll
         element.scrollIntoView({ behavior: 'smooth' });
         // Update URL hash without jumping
-        window.history.pushState(null, '', path);
+        const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
+        window.history.pushState(null, '', baseUrl + path);
       }
     }
     closeMenu();
