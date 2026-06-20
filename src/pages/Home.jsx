@@ -1,5 +1,6 @@
 import Hero from '../components/hero/Hero';
 import HeritageStory from '../components/sections/HeritageStory';
+import Franchise from '../components/sections/Franchise';
 import ProductCarousel from '../components/products/ProductCarousel';
 import Benefits from '../components/sections/Benefits';
 import SugarComparison from '../components/sections/SugarComparison';
@@ -16,6 +17,7 @@ const Home = () => {
       <BackgroundParticles />
       <Hero />
       <HeritageStory />
+      <Franchise />
       <ProductCarousel />
       <Benefits />
       <SugarComparison />
