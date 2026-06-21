@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollDirection } from '../../hooks/useScrollDirection';
 import { navigationLinks } from '../../data/navigation';
@@ -11,6 +11,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollDirection = useScrollDirection();
   const location = useLocation();
+  const navigate = useNavigate();
   const navRef = useRef(null);
 
   // Track scroll position to toggle background opacity/blur
@@ -35,17 +36,19 @@ const Navbar = () => {
   };
 
   const handleLinkClick = (e, path) => {
+    e.preventDefault();
     if (path.startsWith('/#')) {
       const hash = path.substring(1); // gets '#something'
       const element = document.querySelector(hash);
       if (element) {
-        e.preventDefault();
         // Since Lenis is used, we can just use native scrollIntoView and Lenis might catch it, or just do smooth scroll
         element.scrollIntoView({ behavior: 'smooth' });
         // Update URL hash without jumping
         const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
         window.history.pushState(null, '', baseUrl + path);
       }
+    } else {
+      navigate(path);
     }
     closeMenu();
   };
@@ -253,9 +256,12 @@ const Navbar = () => {
                   <Button 
                     variant="primary" 
                     size="lg" 
-                    href="/franchise" 
                     className="w-full"
-                    onClick={closeMenu}
+                    onClick={(e) => {
+                      e.preventDefault();
+                      navigate('/franchise');
+                      closeMenu();
+                    }}
                   >
                     Apply for Franchise
                   </Button>

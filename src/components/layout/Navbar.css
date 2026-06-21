@@ -334,7 +334,8 @@
   width: 100%;
   max-width: 320px;
   padding: var(--spacing-xl);
-  z-index: 2;
+  position: relative;
+  z-index: 10;
 }
 
 .mobile-link {
