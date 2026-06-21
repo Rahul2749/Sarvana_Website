@@ -13,30 +13,32 @@ const FILTERS = ['All', 'Tea', 'Coffee', 'Snacks'];
 const ProductGrid = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
-  const initialCategory = searchParams.get('category') || 'All';
+  const categoryParam = searchParams.get('category') || 'All';
+  const matchedFilter = FILTERS.find(f => f.toLowerCase() === categoryParam.toLowerCase()) || 'All';
   
-  const [activeFilter, setActiveFilter] = useState(initialCategory);
+  const [activeFilter, setActiveFilter] = useState(matchedFilter);
   const gridRef = useRef(null);
   const sectionRef = useRef(null);
 
-
-
   useEffect(() => {
     const category = searchParams.get('category');
-    if (category && FILTERS.includes(category)) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
-      setActiveFilter(category);
-      
-      // Smooth scroll to the section if navigating from a submenu
-      if (sectionRef.current) {
-        setTimeout(() => {
-          sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }, 150);
+    if (category) {
+      const matched = FILTERS.find(f => f.toLowerCase() === category.toLowerCase());
+      if (matched) {
+        setActiveFilter(matched);
+        
+        // Smooth scroll to the section if navigating from a submenu
+        if (sectionRef.current) {
+          setTimeout(() => {
+            sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          }, 150);
+        }
+      } else {
+        setActiveFilter('All');
       }
     } else {
       setActiveFilter('All');
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
   const filteredProducts = activeFilter === 'All' 

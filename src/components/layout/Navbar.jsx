@@ -47,7 +47,10 @@ const Navbar = () => {
         window.history.pushState(null, '', baseUrl + path);
       }
     }
-    closeMenu();
+    // Defer closing the menu slightly so the link click/touch event can propagate fully in mobile browsers
+    setTimeout(() => {
+      closeMenu();
+    }, 100);
   };
 
   // Framer Motion staggered variants for mobile menu
@@ -160,7 +163,8 @@ const Navbar = () => {
             <Button 
               variant="primary" 
               size="sm" 
-              href="/franchise"
+              href="/#franchise"
+              onClick={(e) => handleLinkClick(e, '/#franchise')}
             >
               Apply for Franchise
             </Button>
@@ -253,9 +257,9 @@ const Navbar = () => {
                   <Button 
                     variant="primary" 
                     size="lg" 
-                    href="/franchise" 
+                    href="/#franchise" 
                     className="w-full"
-                    onClick={closeMenu}
+                    onClick={(e) => handleLinkClick(e, '/#franchise')}
                   >
                     Apply for Franchise
                   </Button>
