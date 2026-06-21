@@ -1,5 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { useScrollDirection } from '../../hooks/useScrollDirection';
 import { navigationLinks } from '../../data/navigation';
@@ -11,6 +11,7 @@ const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const scrollDirection = useScrollDirection();
   const location = useLocation();
+  const navigate = useNavigate();
   const navRef = useRef(null);
 
   // Track scroll position to toggle background opacity/blur
@@ -35,16 +36,23 @@ const Navbar = () => {
   };
 
   const handleLinkClick = (e, path) => {
-    if (path.startsWith('/#')) {
-      const hash = path.substring(1); // gets '#something'
+    // Check if path has a hash (like #about or #product-showcase)
+    const hashMatch = path.match(/#([a-zA-Z0-9_-]+)/);
+    if (hashMatch) {
+      const hash = '#' + hashMatch[1];
       const element = document.querySelector(hash);
       if (element) {
-        e.preventDefault();
-        // Since Lenis is used, we can just use native scrollIntoView and Lenis might catch it, or just do smooth scroll
-        element.scrollIntoView({ behavior: 'smooth' });
-        // Update URL hash without jumping
-        const baseUrl = import.meta.env.BASE_URL.replace(/\/$/, '');
-        window.history.pushState(null, '', baseUrl + path);
+        // Check if we are currently on the Home page (or base path)
+        const isHomePage = location.pathname === '/' || location.pathname === import.meta.env.BASE_URL;
+        // Determine the target pathname (excluding query params and hash)
+        const targetPathname = path.split('?')[0].split('#')[0] || '/';
+        const isSamePage = isHomePage && (targetPathname === '/' || targetPathname === '');
+
+        if (isSamePage) {
+          e.preventDefault();
+          element.scrollIntoView({ behavior: 'smooth' });
+          navigate(path);
+        }
       }
     }
     // Defer closing the menu slightly so the link click/touch event can propagate fully in mobile browsers

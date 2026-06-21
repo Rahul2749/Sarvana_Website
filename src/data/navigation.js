@@ -6,9 +6,9 @@ export const navigationLinks = [
     path: "/#menus", 
     id: "nav-menus",
     submenus: [
-      { label: "Tea", path: "/products?category=Tea", id: "sub-tea" },
-      { label: "Coffee", path: "/products?category=Coffee", id: "sub-coffee" },
-      { label: "Snacks", path: "/products?category=Snacks", id: "sub-snacks" }
+      { label: "Tea", path: "/?category=Tea#product-showcase", id: "sub-tea" },
+      { label: "Coffee", path: "/?category=Coffee#product-showcase", id: "sub-coffee" },
+      { label: "Snacks", path: "/?category=Snacks#product-showcase", id: "sub-snacks" }
     ]
   },
   { label: "Process", path: "/#process", id: "nav-process" },

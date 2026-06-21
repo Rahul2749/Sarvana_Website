@@ -1,4 +1,5 @@
-import { useState, useRef, Suspense, lazy } from 'react';
+import { useState, useRef, Suspense, lazy, useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import { motion, AnimatePresence, useMotionValue, useSpring, useTransform } from 'framer-motion';
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -106,10 +107,27 @@ const TiltCard = ({ product, index, isFeatured }) => {
 };
 
 const ProductShowcase = () => {
-  const [activeFilter, setActiveFilter] = useState('All');
+  const location = useLocation();
+  const searchParams = new URLSearchParams(location.search);
+  const categoryParam = searchParams.get('category') || 'All';
+  const matchedFilter = ['All', 'Tea', 'Coffee', 'Snacks'].find(f => f.toLowerCase() === categoryParam.toLowerCase()) || 'All';
+
+  const [activeFilter, setActiveFilter] = useState(matchedFilter);
   const sectionRef = useRef(null);
   
   const filters = ['All', 'Tea', 'Coffee', 'Snacks'];
+
+  useEffect(() => {
+    const category = searchParams.get('category');
+    if (category) {
+      const matched = filters.find(f => f.toLowerCase() === category.toLowerCase());
+      if (matched) {
+        setActiveFilter(matched);
+      }
+    } else {
+      setActiveFilter('All');
+    }
+  }, [location.search]);
 
   const filteredProducts = activeFilter === 'All' 
     ? products.slice(0, 7) 
@@ -132,7 +150,7 @@ const ProductShowcase = () => {
   }, { scope: sectionRef });
 
   return (
-    <section ref={sectionRef} className="product-showcase">
+    <section ref={sectionRef} id="product-showcase" className="product-showcase">
       {/* 3D Ambient Background */}
       <Suspense fallback={null}>
         <ShowcaseParticles />
