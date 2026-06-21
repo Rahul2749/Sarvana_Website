@@ -1,3 +1,7 @@
+.product-grid-section {
+  scroll-margin-top: 100px;
+}
+
 .product-grid-wrapper {
   display: grid;
   grid-template-columns: repeat(2, 1fr); /* 2 columns on mobile by default */

@@ -12,6 +12,7 @@ const Navbar = () => {
   const scrollDirection = useScrollDirection();
   const location = useLocation();
   const navigate = useNavigate();
+  const [openSubmenu, setOpenSubmenu] = useState(null);
   const navRef = useRef(null);
 
   // Track scroll position to toggle background opacity/blur
@@ -25,6 +26,7 @@ const Navbar = () => {
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+    setOpenSubmenu(null);
     // Lock scroll when mobile menu is open
     document.body.style.overflow = !isOpen ? 'hidden' : 'unset';
   };
@@ -163,7 +165,7 @@ const Navbar = () => {
             <Button 
               variant="primary" 
               size="sm" 
-              href="/franchise"
+              onClick={() => navigate('/franchise')}
             >
               Apply for Franchise
             </Button>
@@ -222,9 +224,40 @@ const Navbar = () => {
                 return (
                   <motion.div key={link.id} variants={itemVariants} className="mobile-link-container">
                     {link.submenus ? (
-                      <div className={isActive ? 'mobile-link active' : 'mobile-link'}>
-                        {link.label}
-                      </div>
+                      <>
+                        <div 
+                          className={isActive ? 'mobile-link active' : 'mobile-link'}
+                          onClick={() => setOpenSubmenu(openSubmenu === link.id ? null : link.id)}
+                          style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.5rem', cursor: 'pointer' }}
+                        >
+                          {link.label}
+                          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ transform: openSubmenu === link.id ? 'rotate(180deg)' : 'rotate(0deg)', transition: 'transform 0.3s' }}>
+                            <polyline points="6 9 12 15 18 9"></polyline>
+                          </svg>
+                        </div>
+                        <AnimatePresence>
+                          {openSubmenu === link.id && (
+                            <motion.div 
+                              className="mobile-submenus"
+                              initial={{ height: 0, opacity: 0, marginTop: 0 }}
+                              animate={{ height: 'auto', opacity: 1, marginTop: '0.5rem' }}
+                              exit={{ height: 0, opacity: 0, marginTop: 0 }}
+                              style={{ overflow: 'hidden' }}
+                            >
+                              {link.submenus.map(sub => (
+                                <Link
+                                  key={sub.id}
+                                  to={sub.path}
+                                  className="mobile-sublink"
+                                  onClick={(e) => handleLinkClick(e, sub.path)}
+                                >
+                                  {sub.label}
+                                </Link>
+                              ))}
+                            </motion.div>
+                          )}
+                        </AnimatePresence>
+                      </>
                     ) : (
                       <Link 
                         to={link.path}
@@ -234,19 +267,6 @@ const Navbar = () => {
                         {link.label}
                       </Link>
                     )}
-                    {link.submenus && (
-                      <div className="mobile-submenus">
-                        {link.submenus.map(sub => (
-                          <Link
-                            key={sub.id}
-                            to={sub.path}
-                            className="mobile-sublink"
-                            onClick={(e) => handleLinkClick(e, sub.path)}
-                          >
-                            {sub.label}
-                          </Link>
-                        ))}
-                      </div>
                     )}
                   </motion.div>
                 );
