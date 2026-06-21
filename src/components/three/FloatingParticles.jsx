@@ -1,20 +1,20 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 /* ─── Coffee Bean ─── */
 const CoffeeBean = ({ position, rotation, scale, speed }) => {
   const meshRef = useRef();
-  const phaseX = useRef(Math.random() * Math.PI * 2);
-  const phaseY = useRef(Math.random() * Math.PI * 2);
+  const [phaseX] = useState(() => Math.random() * Math.PI * 2);
+  const [phaseY] = useState(() => Math.random() * Math.PI * 2);
 
   useFrame((state) => {
     if (!meshRef.current) return;
     const t = state.clock.elapsedTime * speed;
     meshRef.current.rotation.x += 0.003 * speed;
     meshRef.current.rotation.z += 0.002 * speed;
-    meshRef.current.position.y = position[1] + Math.sin(t + phaseY.current) * 0.5;
-    meshRef.current.position.x = position[0] + Math.sin(t * 0.7 + phaseX.current) * 0.3;
+    meshRef.current.position.y = position[1] + Math.sin(t + phaseY) * 0.5;
+    meshRef.current.position.x = position[0] + Math.sin(t * 0.7 + phaseX) * 0.3;
   });
 
   return (
@@ -34,14 +34,14 @@ const CoffeeBean = ({ position, rotation, scale, speed }) => {
 /* ─── Tea Leaf ─── */
 const TeaLeaf = ({ position, rotation, scale, speed }) => {
   const meshRef = useRef();
-  const phaseRef = useRef(Math.random() * Math.PI * 2);
+  const [phase] = useState(() => Math.random() * Math.PI * 2);
 
   useFrame((state) => {
     if (!meshRef.current) return;
     const t = state.clock.elapsedTime * speed;
     meshRef.current.rotation.y += 0.004 * speed;
-    meshRef.current.rotation.z = Math.sin(t + phaseRef.current) * 0.2;
-    meshRef.current.position.y = position[1] + Math.sin(t * 0.8 + phaseRef.current) * 0.6;
+    meshRef.current.rotation.z = Math.sin(t + phase) * 0.2;
+    meshRef.current.position.y = position[1] + Math.sin(t * 0.8 + phase) * 0.6;
   });
 
   return (
@@ -63,14 +63,14 @@ const TeaLeaf = ({ position, rotation, scale, speed }) => {
 /* ─── Jaggery Cube ─── */
 const JaggeryCube = ({ position, rotation, scale, speed }) => {
   const meshRef = useRef();
-  const phaseRef = useRef(Math.random() * Math.PI * 2);
+  const [phase] = useState(() => Math.random() * Math.PI * 2);
 
   useFrame((state) => {
     if (!meshRef.current) return;
     const t = state.clock.elapsedTime * speed;
     meshRef.current.rotation.x += 0.002 * speed;
     meshRef.current.rotation.y += 0.003 * speed;
-    meshRef.current.position.y = position[1] + Math.sin(t * 0.6 + phaseRef.current) * 0.4;
+    meshRef.current.position.y = position[1] + Math.sin(t * 0.6 + phase) * 0.4;
   });
 
   return (
@@ -91,7 +91,7 @@ const JaggeryCube = ({ position, rotation, scale, speed }) => {
 const FloatingParticles = ({ count = 25 }) => {
   const groupRef = useRef();
 
-  const objects = useMemo(() => {
+  const [objects] = useState(() => {
     const items = [];
     const beanCount = Math.floor(count * 0.4);
     const leafCount = Math.floor(count * 0.3);
@@ -140,7 +140,7 @@ const FloatingParticles = ({ count = 25 }) => {
     }
 
     return items;
-  }, [count]);
+  });
 
   useFrame((state) => {
     if (groupRef.current) {

@@ -1,4 +1,3 @@
-import SectionTitle from '../components/ui/SectionTitle';
 import ProductGrid from '../components/products/ProductGrid';
 import './Products.css';
 

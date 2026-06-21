@@ -1,6 +1,4 @@
 import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
 import Button from '../ui/Button';
 import './ProductCarousel.css';
 

@@ -1,11 +1,11 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useState } from 'react';
 import { useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
 const GoldenDust = ({ count = 80 }) => {
   const pointsRef = useRef();
 
-  const positions = useMemo(() => {
+  const [positions] = useState(() => {
     const arr = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       arr[i * 3] = (Math.random() - 0.5) * 28;
@@ -13,15 +13,15 @@ const GoldenDust = ({ count = 80 }) => {
       arr[i * 3 + 2] = (Math.random() - 0.5) * 12 - 4;
     }
     return arr;
-  }, [count]);
+  });
 
-  const speeds = useMemo(() => {
+  const [speeds] = useState(() => {
     const arr = new Float32Array(count);
     for (let i = 0; i < count; i++) {
       arr[i] = Math.random() * 0.2 + 0.05;
     }
     return arr;
-  }, [count]);
+  });
 
   useFrame((state) => {
     if (!pointsRef.current) return;

@@ -1,6 +1,4 @@
 import { useRef } from 'react';
-import { useGSAP } from '@gsap/react';
-import gsap from 'gsap';
 import { useScrollReveal, useStaggerReveal } from '../../hooks/useGSAPAnimations';
 import SectionTitle from '../ui/SectionTitle';
 import Button from '../ui/Button';

@@ -8,6 +8,8 @@ import Button from '../ui/Button';
 import { products } from '../../data/products';
 import './ProductGrid.css';
 
+const FILTERS = ['All', 'Tea', 'Coffee', 'Snacks'];
+
 const ProductGrid = () => {
   const location = useLocation();
   const searchParams = new URLSearchParams(location.search);
@@ -17,11 +19,12 @@ const ProductGrid = () => {
   const gridRef = useRef(null);
   const sectionRef = useRef(null);
 
-  const filters = ['All', 'Tea', 'Coffee', 'Snacks'];
+
 
   useEffect(() => {
     const category = searchParams.get('category');
-    if (category && filters.includes(category)) {
+    if (category && FILTERS.includes(category)) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       setActiveFilter(category);
       
       // Smooth scroll to the section if navigating from a submenu
@@ -33,6 +36,7 @@ const ProductGrid = () => {
     } else {
       setActiveFilter('All');
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.search]);
 
   const filteredProducts = activeFilter === 'All' 
@@ -58,7 +62,7 @@ const ProductGrid = () => {
         />
         
         <div className="filter-tabs" style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
-          {filters.map(filter => (
+          {FILTERS.map(filter => (
             <button
               key={filter}
               onClick={() => setActiveFilter(filter)}

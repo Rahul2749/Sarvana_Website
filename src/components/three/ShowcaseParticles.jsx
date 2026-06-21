@@ -1,4 +1,4 @@
-import { useRef, useMemo } from 'react';
+import { useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import * as THREE from 'three';
 
@@ -6,7 +6,7 @@ const Particles = ({ count = 60 }) => {
   const pointsRef = useRef(null);
 
   // Generate random positions and speeds for the particles
-  const [positions, speeds] = useMemo(() => {
+  const [[positions, speeds]] = useState(() => {
     const pos = new Float32Array(count * 3);
     const spd = new Float32Array(count);
     
@@ -17,8 +17,8 @@ const Particles = ({ count = 60 }) => {
       
       spd[i] = 0.05 + Math.random() * 0.1; // speed
     }
-    return [pos, spd];
-  }, [count]);
+    return [[pos, spd]];
+  });
 
   useFrame((state, delta) => {
     if (!pointsRef.current) return;

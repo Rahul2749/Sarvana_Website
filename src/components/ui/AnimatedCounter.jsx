@@ -2,7 +2,7 @@ import { useRef } from 'react';
 import { useGSAP } from '@gsap/react';
 import { counterAnimation } from '../../utils/gsapAnimations';
 
-const AnimatedCounter = ({ end, suffix = '', duration = 2, className = '' }) => {
+const AnimatedCounter = ({ end, suffix = '', className = '' }) => {
   const counterRef = useRef(null);
 
   useGSAP(() => {

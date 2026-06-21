@@ -1,11 +1,11 @@
-import { Canvas, useThree, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame } from '@react-three/fiber';
 import { Suspense, useRef, useEffect, useCallback, useState } from 'react';
 import FloatingParticles from './FloatingParticles';
 import GoldenDust from './GoldenDust';
 
 /* Mouse-reactive camera controller */
 const CameraController = () => {
-  const { camera } = useThree();
+
   const targetRef = useRef({ x: 0, y: 0 });
 
   const handleMouseMove = useCallback((e) => {
@@ -18,9 +18,9 @@ const CameraController = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, [handleMouseMove]);
 
-  useFrame(() => {
-    camera.rotation.y += (-targetRef.current.x * 0.02 - camera.rotation.y) * 0.03;
-    camera.rotation.x += (-targetRef.current.y * 0.015 - camera.rotation.x) * 0.03;
+  useFrame((state) => {
+    state.camera.rotation.y += (-targetRef.current.x * 0.02 - state.camera.rotation.y) * 0.03;
+    state.camera.rotation.x += (-targetRef.current.y * 0.015 - state.camera.rotation.x) * 0.03;
   });
 
   return null;

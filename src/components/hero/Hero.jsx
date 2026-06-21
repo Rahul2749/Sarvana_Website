@@ -26,15 +26,6 @@ const Hero = () => {
     return () => clearTimeout(timer);
   }, []);
 
-  const handleHashClick = (e, hash) => {
-    const element = document.querySelector(hash);
-    if (element) {
-      e.preventDefault();
-      element.scrollIntoView({ behavior: 'smooth' });
-      window.history.pushState(null, '', `/${hash}`);
-    }
-  };
-
   useGSAP(() => {
     // Single clean timeline — no overlapping, sequential flow
     const tl = gsap.timeline({

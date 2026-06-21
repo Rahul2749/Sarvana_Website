@@ -30,6 +30,7 @@ const Navbar = () => {
 
   const closeMenu = () => {
     setIsOpen(false);
+    // eslint-disable-next-line react-hooks/immutability
     document.body.style.overflow = 'unset';
   };
 
