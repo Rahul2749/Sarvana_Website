@@ -118,16 +118,15 @@ const Navbar = () => {
               if (link.submenus) {
                 return (
                   <div key={link.id} className="nav-dropdown-container">
-                    <Link 
-                      to={link.path}
+                    <div 
                       className={isActive ? 'nav-link active' : 'nav-link'}
-                      onClick={(e) => handleLinkClick(e, link.path)}
+                      style={{ cursor: 'default' }}
                     >
                       {link.label}
                       <svg className="dropdown-arrow" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                         <polyline points="6 9 12 15 18 9"></polyline>
                       </svg>
-                    </Link>
+                    </div>
                     <div className="nav-dropdown">
                       {link.submenus.map(sub => (
                         <Link 
@@ -213,13 +212,19 @@ const Navbar = () => {
                 
                 return (
                   <motion.div key={link.id} variants={itemVariants} className="mobile-link-container">
-                    <Link 
-                      to={link.path}
-                      className={isActive ? 'mobile-link active' : 'mobile-link'}
-                      onClick={(e) => handleLinkClick(e, link.path)}
-                    >
-                      {link.label}
-                    </Link>
+                    {link.submenus ? (
+                      <div className={isActive ? 'mobile-link active' : 'mobile-link'}>
+                        {link.label}
+                      </div>
+                    ) : (
+                      <Link 
+                        to={link.path}
+                        className={isActive ? 'mobile-link active' : 'mobile-link'}
+                        onClick={(e) => handleLinkClick(e, link.path)}
+                      >
+                        {link.label}
+                      </Link>
+                    )}
                     {link.submenus && (
                       <div className="mobile-submenus">
                         {link.submenus.map(sub => (
@@ -244,6 +249,7 @@ const Navbar = () => {
                     size="lg" 
                     href="/franchise" 
                     className="w-full"
+                    onClick={closeMenu}
                   >
                     Apply for Franchise
                   </Button>

@@ -31,6 +31,7 @@ const Button = ({
         to={href}
         className={classes}
         onMouseMove={handleMouseMove}
+        onClick={onClick}
         {...props}
       >
         <span className="btn-content">{children}</span>
