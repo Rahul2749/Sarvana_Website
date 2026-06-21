@@ -185,6 +185,12 @@ const Navbar = () => {
             exit={{ x: '100%' }}
             transition={{ type: 'spring', stiffness: 300, damping: 30 }}
           >
+            <button className="mobile-menu-close" onClick={closeMenu} aria-label="Close menu">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="var(--color-accent)" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
             {/* Floating background decorative SVGs */}
             <div className="mobile-menu-bg-element element-coffee-menu">
               <svg viewBox="0 0 100 100" width="140" height="140">
