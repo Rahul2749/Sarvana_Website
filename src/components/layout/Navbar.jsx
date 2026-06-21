@@ -267,7 +267,6 @@ const Navbar = () => {
                         {link.label}
                       </Link>
                     )}
-                    )}
                   </motion.div>
                 );
               })}
