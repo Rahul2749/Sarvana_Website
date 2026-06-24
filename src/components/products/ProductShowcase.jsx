@@ -208,8 +208,9 @@ const ProductShowcase = () => {
           </AnimatePresence>
         </motion.div>
 
-        <div className="ps-view-all">
-          <Button variant="primary" size="lg" href="/products">Explore Full Catalog</Button>
+        <div className="ps-view-all" style={{ display: 'flex', gap: '1rem', justifyContent: 'center', flexWrap: 'wrap' }}>
+          <Button variant="primary" size="lg" href="/products">Explore Products</Button>
+          <Button variant="secondary" size="lg" href="/franchise">Own a Franchise</Button>
         </div>
       </div>
     </section>
