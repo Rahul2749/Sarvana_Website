@@ -61,6 +61,7 @@ const ProcessJourney = () => {
           title="The Sacred Journey of Thati Bellam"
           description="Every sip of Sarvana tea and coffee is sweetened by a 100% natural, centuries-old artisanal process."
           align="center"
+          light={true}
         />
 
         <div className="process-timeline">
