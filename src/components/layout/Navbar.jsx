@@ -207,16 +207,7 @@ const Navbar = () => {
             })}
           </nav>
 
-          <div className="navbar-actions desktop-only">
-            <Button 
-              variant="primary" 
-              size="sm" 
-              href="/#franchise"
-              onClick={(e) => handleLinkClick(e, '/#franchise')}
-            >
-              Apply for Franchise
-            </Button>
-          </div>
+          {/* Desktop actions removed */}
 
           <button className="hamburger-btn mobile-only" onClick={toggleMenu} aria-label="Menu">
             <div className={`hamburger ${isOpen ? 'open' : ''}`}>
@@ -324,19 +315,7 @@ const Navbar = () => {
                   </motion.div>
                 );
               })}
-              <motion.div variants={itemVariants} className="w-full">
-                <div className="mobile-menu-actions">
-                  <Button 
-                    variant="primary" 
-                    size="lg" 
-                    href="/#franchise" 
-                    className="w-full"
-                    onClick={(e) => handleLinkClick(e, '/#franchise')}
-                  >
-                    Apply for Franchise
-                  </Button>
-                </div>
-              </motion.div>
+              {/* Mobile actions removed */}
             </motion.div>
           </motion.div>
         )}
