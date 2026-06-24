@@ -11,6 +11,7 @@ import Footer from './components/layout/Footer';
 import PageTransition from './components/layout/PageTransition';
 import ScrollToTop from './components/layout/ScrollToTop';
 import Loader from './components/ui/Loader';
+import FloatingAction from './components/ui/FloatingAction';
 
 import Home from './pages/Home';
 import Products from './pages/Products';
@@ -71,6 +72,7 @@ const AppContent = () => {
         </AnimatePresence>
       </main>
       <Footer />
+      <FloatingAction />
     </div>
   );
 };

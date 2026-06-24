@@ -38,20 +38,21 @@
 .hero-content {
   position: relative;
   z-index: 3;
-  text-align: center;
+  text-align: left;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   padding-top: clamp(60px, 9vh, 90px);
   padding-bottom: var(--spacing-sm);
-  max-width: 760px;
+  max-width: 900px;
+  width: 100%;
   will-change: transform;
 }
 
 /* No card — just transparent container for the text */
 .hero-glass-panel {
   position: relative;
-  padding: clamp(8px, 1.5vw, 16px) clamp(16px, 3vw, 32px);
+  padding: clamp(8px, 1.5vw, 16px) 0;
 }
 
 /* ─── Logo ─── */
@@ -119,6 +120,36 @@
   pointer-events: none;
 }
 
+/* ─── Badge ─── */
+.hero-badge-container {
+  margin-bottom: var(--spacing-lg);
+  overflow: hidden;
+}
+
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(45, 24, 16, 0.6);
+  border: 1px solid rgba(217, 180, 74, 0.3);
+  padding: 6px 14px;
+  border-radius: 999px;
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 2px;
+  backdrop-filter: blur(4px);
+}
+
+.badge-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--color-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 6px var(--color-accent);
+}
+
 /* ─── Title ─── */
 .word-wrapper {
   display: inline-block;
@@ -141,15 +172,22 @@
   color: var(--color-white);
   font-family: var(--font-display);
   font-size: clamp(2.4rem, 5vw, 4.2rem);
-  font-weight: 700;
-  line-height: 1.15;
+  font-weight: 600;
+  line-height: 1.1;
   margin-bottom: var(--spacing-sm);
   text-shadow: 0 4px 25px rgba(0, 0, 0, 0.6), 0 2px 8px rgba(0, 0, 0, 0.4);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em;
 }
 
 .block {
   display: block;
+}
+
+.text-accent-italic {
+  color: var(--color-accent);
+  font-family: var(--font-accent), serif;
+  font-style: italic;
+  font-weight: 500;
 }
 
 .text-accent {
@@ -162,14 +200,14 @@
 }
 
 .hero-subtitle {
-  color: rgba(245, 232, 212, 0.75);
+  color: rgba(245, 232, 212, 0.85);
   font-family: var(--font-body);
-  font-size: clamp(0.85rem, 1.5vw, 1.05rem);
-  font-weight: 300;
-  max-width: 460px;
-  margin: 0 auto;
-  line-height: 1.75;
-  letter-spacing: 0.4px;
+  font-size: clamp(0.95rem, 1.8vw, 1.2rem);
+  font-weight: 400;
+  max-width: 600px;
+  margin: var(--spacing-md) 0 0 0;
+  line-height: 1.6;
+  letter-spacing: 0.2px;
 }
 
 /* Golden divider */
@@ -186,8 +224,8 @@
   display: flex;
   gap: var(--spacing-md);
   flex-wrap: wrap;
-  justify-content: center;
-  margin-top: var(--spacing-xs);
+  justify-content: flex-start;
+  margin-top: var(--spacing-xl);
   position: relative;
   z-index: 50;
   pointer-events: auto;

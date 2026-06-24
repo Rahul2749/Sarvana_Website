@@ -291,32 +291,53 @@ const Hero = () => {
         </div>
 
         <div ref={glassPanelRef} className="hero-glass-panel">
+          <div className="hero-badge-container">
+            <div className="hero-badge">
+              <span className="badge-dot"></span>
+              FRANCHISE OPPORTUNITY &middot; PAN INDIA
+            </div>
+          </div>
+
           <div className="hero-text">
             <h1 className="hero-title">
               <span className="block hero-title-line">
-                {"Sweetened by Nature,".split(" ").map((word, i) => (
-                  <span key={i} className="word-wrapper">
+                {"Start Your Own".split(" ").map((word, i) => (
+                  <span key={`l1-${i}`} className="word-wrapper">
                     <span className="animated-word">{word}&nbsp;</span>
                   </span>
                 ))}
               </span>
-              <span className="block hero-title-line text-accent">
-                {"Brewed with Love".split(" ").map((word, i) => (
-                  <span key={i} className="word-wrapper">
+              <span className="block hero-title-line">
+                <span className="word-wrapper"><span className="animated-word text-accent-italic" style={{ paddingRight: '12px' }}>Sarvana</span></span>
+                {"Thati Bellam".split(" ").map((word, i) => (
+                  <span key={`l2-${i}`} className="word-wrapper">
+                    <span className="animated-word">{word}&nbsp;</span>
+                  </span>
+                ))}
+              </span>
+              <span className="block hero-title-line">
+                {"Tea & Coffee".split(" ").map((word, i) => (
+                  <span key={`l3-${i}`} className="word-wrapper">
+                    <span className="animated-word">{word}&nbsp;</span>
+                  </span>
+                ))}
+              </span>
+              <span className="block hero-title-line">
+                {"Franchise".split(" ").map((word, i) => (
+                  <span key={`l4-${i}`} className="word-wrapper">
                     <span className="animated-word">{word}&nbsp;</span>
                   </span>
                 ))}
               </span>
             </h1>
-            <div className="hero-divider" />
             <p className="hero-subtitle">
-              Premium Tea, Coffee & Snacks crafted with the traditional goodness of pure Palm Jaggery. Join our legacy by owning a franchise.
+              Serve authentic South Indian tea & coffee crafted with traditional <span className="text-accent" style={{ fontWeight: 500 }}>Bellam (Jaggery)</span> recipes &mdash; and build a profitable, heritage-rich business.
             </p>
           </div>
 
           <div ref={buttonsRef} className="hero-buttons" style={{ position: 'relative', zIndex: 100, pointerEvents: 'auto' }}>
-            <Button variant="primary" size="lg" href="/products">Explore Products</Button>
-            <Button variant="secondary" size="lg" href="/franchise">Own a Franchise</Button>
+            <Button variant="primary" size="lg" href="/franchise">Apply For Franchise &rarr;</Button>
+            <Button variant="secondary" size="lg" href="/products">Explore Products</Button>
           </div>
         </div>
       </div>
