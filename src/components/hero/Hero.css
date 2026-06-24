@@ -409,7 +409,11 @@
 
 @media (max-width: 768px) {
   .hero-content {
-    padding-top: clamp(60px, 12vh, 90px);
+    padding-top: clamp(100px, 15vh, 140px);
+  }
+
+  .scroll-text {
+    display: none;
   }
 
   .hero-beverages {
@@ -443,7 +447,7 @@
     width: clamp(70px, 15vw, 90px);
     left: 50%;
     right: auto;
-    top: 5%;
+    top: 5px;
     transform: translateX(-50%);
   }
 
