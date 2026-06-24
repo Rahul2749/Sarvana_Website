@@ -75,8 +75,8 @@ const QuickContact = () => {
                   </svg>
                 </span>
                 <div className="contact-text">
-                  <h4>Sarvana Heritage Flagship</h4>
-                  <p>12, Palm Grove Avenue, Mylapore, Chennai - 600004</p>
+                  <h4>Sarvana Thatti bellam tea and coffee</h4>
+                  <p>MIG 524, opposite GHMC Park, Mayuri Nagar, Nizampet, Hyderabad - 500090</p>
                 </div>
               </div>
               <div className="contact-item">
@@ -87,7 +87,7 @@ const QuickContact = () => {
                 </span>
                 <div className="contact-text">
                   <h4>Phone & WhatsApp</h4>
-                  <p>+91 98765 43210</p>
+                  <p>+91 80088 98935</p>
                 </div>
               </div>
               <div className="contact-item">

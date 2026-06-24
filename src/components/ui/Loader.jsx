@@ -22,12 +22,12 @@ const Loader = ({ onComplete }) => {
       }}
     >
       <div style={{
-        width: '120px',
-        height: '120px',
+        width: '240px',
+        height: '240px',
         marginBottom: '2rem',
         animation: 'pulse 2s infinite ease-in-out'
       }}>
-        <img src="/images/Logo/logo.jpeg" alt="Sarvana" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
+        <img src="/images/Logo/Sarvana_Logo.png" alt="Sarvana" style={{ width: '100%', height: '100%', objectFit: 'contain' }} />
       </div>
       <div style={{
         width: '200px',

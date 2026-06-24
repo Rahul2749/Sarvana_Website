@@ -4,21 +4,21 @@ import './ProductCarousel.css';
 
 const categories = [
   {
-    id: 'tea',
+    id: 'Tea',
     title: 'Premium Tea',
     description: 'Blended with traditional Indian spices and sweetened with natural palm jaggery.',
     image: '/images/products/category-tea.jpg',
     color: '#D9B44A'
   },
   {
-    id: 'coffee',
+    id: 'Coffee',
     title: 'Filter Coffee',
     description: 'Authentic South Indian filter coffee naturally sweetened with rich Thati Bellam.',
     image: '/images/products/category-coffee.jpg',
     color: '#351F13'
   },
   {
-    id: 'snacks',
+    id: 'Snacks Mandi',
     title: 'Traditional Snacks',
     description: 'Crispy, savory, and sweet delicacies made with 100% pure palm jaggery.',
     image: '/images/products/category-snacks.jpg',

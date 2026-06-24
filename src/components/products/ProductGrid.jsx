@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect } from 'react';
+import { useRef, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 import { useGSAP } from '@gsap/react';
 import { cardEmerge } from '../../utils/gsapAnimations';
@@ -8,69 +8,77 @@ import Button from '../ui/Button';
 import { products } from '../../data/products';
 import './ProductGrid.css';
 
-const FILTERS = ['All', 'Tea', 'Coffee', 'Snacks'];
+const FILTERS = ['Tea', 'Coffee', 'Juices', 'Lassi', 'Mojitos', 'Milkshakes', 'Fruit Custard', 'Snacks Mandi'];
 
 const ProductGrid = () => {
   const location = useLocation();
-  const searchParams = new URLSearchParams(location.search);
-  const categoryParam = searchParams.get('category') || 'All';
-  const matchedFilter = FILTERS.find(f => f.toLowerCase() === categoryParam.toLowerCase()) || 'All';
-  
-  const [activeFilter, setActiveFilter] = useState(matchedFilter);
   const gridRef = useRef(null);
-  const sectionRef = useRef(null);
+
+  // Group products by category
+  const groupedProducts = {};
+  FILTERS.forEach(filter => {
+    groupedProducts[filter] = products.filter(p => p.category === filter);
+  });
+
+  const scrollToSection = (id) => {
+    const el = document.getElementById(`category-${id.replace(/\s+/g, '-')}`);
+    if (el) {
+      // Get the height of the navbar (usually around 80px) + padding
+      const y = el.getBoundingClientRect().top + window.scrollY - 180; 
+      window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
+    const searchParams = new URLSearchParams(location.search);
     const category = searchParams.get('category');
-    if (category) {
-      const matched = FILTERS.find(f => f.toLowerCase() === category.toLowerCase());
-      if (matched) {
-        setActiveFilter(matched);
-        
-        // Smooth scroll to the section if navigating from a submenu
-        if (sectionRef.current) {
-          setTimeout(() => {
-            sectionRef.current.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }, 150);
-        }
-      } else {
-        setActiveFilter('All');
-      }
-    } else {
-      setActiveFilter('All');
+    if (category && FILTERS.includes(category)) {
+      setTimeout(() => {
+        scrollToSection(category);
+      }, 300);
     }
   }, [location.search]);
-
-  const filteredProducts = activeFilter === 'All' 
-    ? products.slice(0, 8) 
-    : products.filter(p => p.category === activeFilter).slice(0, 8);
 
   // Card emerge animation — rise from below with fade + scale
   useGSAP(() => {
     if (gridRef.current) {
       const cards = gridRef.current.querySelectorAll('.product-card');
       if (cards.length) {
-        cardEmerge(cards, gridRef.current, 0.1);
+        // Only animate the first 8 cards to avoid lag on 100 items
+        cardEmerge(Array.from(cards).slice(0, 8), gridRef.current, 0.1);
       }
     }
-  }, { scope: gridRef, dependencies: [activeFilter] });
+  }, { scope: gridRef });
 
   return (
-    <section ref={sectionRef} className="section product-grid-section">
+    <section className="section product-grid-section">
       <div className="container">
         <SectionTitle 
-          subtitle="Our Collection" 
+          subtitle="Our Menu" 
           title="Handcrafted with Love" 
         />
         
-        <div className="filter-tabs" style={{ display: 'flex', justifyContent: 'center', gap: '1rem', marginBottom: '3rem', flexWrap: 'wrap' }}>
+        <div className="filter-tabs" style={{ 
+          display: 'flex', 
+          justifyContent: 'center', 
+          gap: '1rem', 
+          marginBottom: '3rem', 
+          flexWrap: 'wrap',
+          position: 'sticky',
+          top: '80px',
+          zIndex: 40,
+          background: 'rgba(248, 245, 238, 0.95)',
+          backdropFilter: 'blur(10px)',
+          padding: '1rem 0',
+          borderBottom: '1px solid rgba(0,0,0,0.05)'
+        }}>
           {FILTERS.map(filter => (
             <button
               key={filter}
-              onClick={() => setActiveFilter(filter)}
+              onClick={() => scrollToSection(filter)}
               style={{
-                background: activeFilter === filter ? 'var(--color-primary)' : 'transparent',
-                color: activeFilter === filter ? 'var(--color-white)' : 'var(--color-primary)',
+                background: 'transparent',
+                color: 'var(--color-primary)',
                 border: `1px solid var(--color-primary)`,
                 padding: '0.5rem 1.5rem',
                 borderRadius: '9999px',
@@ -79,24 +87,47 @@ const ProductGrid = () => {
                 fontFamily: 'var(--font-body)',
                 fontWeight: 500
               }}
+              onMouseEnter={(e) => {
+                  e.target.style.background = 'var(--color-primary)';
+                  e.target.style.color = 'var(--color-white)';
+              }}
+              onMouseLeave={(e) => {
+                  e.target.style.background = 'transparent';
+                  e.target.style.color = 'var(--color-primary)';
+              }}
             >
               {filter}
             </button>
           ))}
         </div>
 
-        <div 
-          ref={gridRef}
-          className="product-grid-wrapper"
-        >
-          {filteredProducts.map(product => (
-            <ProductCard key={`${product.id}-${activeFilter}`} product={product} />
+        <div ref={gridRef}>
+          {FILTERS.map(category => (
+            <div key={category} id={`category-${category.replace(/\s+/g, '-')}`} style={{ paddingTop: '2rem', paddingBottom: '3rem' }}>
+              <h3 style={{ 
+                fontSize: '2.5rem', 
+                color: 'var(--color-primary)', 
+                fontFamily: 'var(--font-heading)',
+                marginBottom: '2rem',
+                borderBottom: '1px solid rgba(0,0,0,0.1)',
+                paddingBottom: '0.5rem'
+              }}>
+                {category}
+              </h3>
+              <div className="product-grid-wrapper">
+                {groupedProducts[category].map(product => (
+                  <ProductCard key={product.id} product={product} />
+                ))}
+              </div>
+            </div>
           ))}
         </div>
 
-        <div className="text-center">
-          <Button variant="secondary" size="lg" href="/products">View All Products</Button>
-        </div>
+        {location.pathname !== '/products' && (
+          <div className="text-center" style={{ marginTop: '3rem' }}>
+            <Button variant="secondary" size="lg" href="/products">View Full Menu</Button>
+          </div>
+        )}
       </div>
     </section>
   );

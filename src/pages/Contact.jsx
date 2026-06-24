@@ -21,11 +21,11 @@ const Contact = () => {
           <div className="contact-info">
             <div className="info-card">
               <h3>Visit Us</h3>
-              <p>123 Palm Grove Avenue<br />Jubilee Hills, Hyderabad<br />Telangana 500033</p>
+              <p>MIG 524, opposite GHMC Park<br />Mayuri Nagar, Nizampet<br />Hyderabad - 500090</p>
             </div>
             <div className="info-card">
               <h3>Contact</h3>
-              <p>Email: hello@sarvana.com<br />Phone: +91 98765 43210</p>
+              <p>Email: hello@sarvana.com<br />Phone: +91 80088 98935</p>
             </div>
             <div className="info-card">
               <h3>Hours</h3>

@@ -97,7 +97,11 @@ const TiltCard = ({ product, index, isFeatured }) => {
           <p className="ps-desc">{product.description}</p>
           
           <div className="ps-footer">
-            <span className="ps-price">₹{product.price}</span>
+            {product.price ? (
+              <span className="ps-price">₹{product.price}</span>
+            ) : (
+              <span className="ps-price" style={{fontSize: '0.9rem'}}>Price upon request</span>
+            )}
             <button className="ps-btn">Add to Cart</button>
           </div>
         </div>
@@ -115,7 +119,7 @@ const ProductShowcase = () => {
   const [activeFilter, setActiveFilter] = useState(matchedFilter);
   const sectionRef = useRef(null);
   
-  const filters = ['All', 'Tea', 'Coffee', 'Snacks'];
+  const filters = ['All', 'Juices', 'Lassi', 'Mojitos', 'Milkshakes', 'Fruit Custard', 'Snacks Mandi', 'Tea', 'Coffee'];
 
   useEffect(() => {
     const category = searchParams.get('category');

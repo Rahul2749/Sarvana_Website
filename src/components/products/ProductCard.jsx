@@ -40,7 +40,11 @@ const ProductCard = ({ product }) => {
           </div>
           
           <div className="product-bottom">
-            <span className="product-price">₹{product.price}</span>
+            {product.price ? (
+              <span className="product-price">₹{product.price}</span>
+            ) : (
+              <span className="product-price">Price upon request</span>
+            )}
             <Button variant="secondary" size="sm" className="view-details-btn" href={`/products/${product.id}`}>
               Details
             </Button>
