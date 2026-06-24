@@ -57,9 +57,10 @@
 
 /* ─── Logo ─── */
 .hero-logo-container {
-  position: relative;
-  margin-bottom: var(--spacing-md);
-  width: clamp(100px, 14vw, 140px);
+  position: absolute;
+  right: 5%;
+  top: 20%;
+  width: clamp(120px, 16vw, 180px);
   aspect-ratio: 1;
   display: flex;
   align-items: center;
@@ -67,6 +68,7 @@
   transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
   cursor: pointer;
   will-change: transform;
+  z-index: 10;
 }
 
 .hero-logo-container:hover {
