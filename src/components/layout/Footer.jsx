@@ -39,10 +39,9 @@ const Footer = () => {
           <div className="footer-links">
             <h3>Products</h3>
             <ul>
-              <li><Link to="/products?category=tea">Premium Tea</Link></li>
-              <li><Link to="/products?category=coffee">Filter Coffee</Link></li>
-              <li><Link to="/products?category=snacks">Traditional Snacks</Link></li>
-              <li><Link to="/products?category=gifts">Gift Boxes</Link></li>
+              <li><Link to="/products?category=Tea">Premium Tea</Link></li>
+              <li><Link to="/products?category=Coffee">Filter Coffee</Link></li>
+              <li><Link to="/products?category=Snacks Mandi">Snacks Mandi</Link></li>
             </ul>
           </div>
 

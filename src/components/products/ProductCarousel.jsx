@@ -1,4 +1,5 @@
 import { useRef } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Button from '../ui/Button';
 import './ProductCarousel.css';
 
@@ -21,13 +22,28 @@ const categories = [
     id: 'Snacks Mandi',
     title: 'Traditional Snacks',
     description: 'Crispy, savory, and sweet delicacies made with 100% pure palm jaggery.',
-    image: '/images/products/category-snacks.jpg',
+    image: '/images/products/category_mandi_1782302305628.png',
     color: '#B8592A'
   }
 ];
 
 const ProductCarousel = () => {
   const containerRef = useRef(null);
+  const navigate = useNavigate();
+
+  const handleViewCollection = (categoryId) => {
+    // Navigate and update query param
+    navigate(`/?category=${categoryId}`);
+    
+    // Scroll to the ProductShowcase section
+    setTimeout(() => {
+      const el = document.getElementById('product-showcase');
+      if (el) {
+        const y = el.getBoundingClientRect().top + window.scrollY - 100;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+      }
+    }, 50);
+  };
 
   return (
     <section ref={containerRef} id="menus" className="product-carousel-section">
@@ -45,7 +61,13 @@ const ProductCarousel = () => {
                   <span className="panel-number">0{index + 1}</span>
                   <h3 style={{ color: cat.color }}>{cat.title}</h3>
                   <p>{cat.description}</p>
-                  <Button variant="primary" href={`/products?category=${cat.id}`}>View Collection</Button>
+                  <Button 
+                    variant="secondary" 
+                    onClick={() => handleViewCollection(cat.id)}
+                    style={{ position: 'relative', zIndex: 10 }}
+                  >
+                    View Collection
+                  </Button>
                 </div>
                 <div className="panel-image-container">
                   <div className="panel-image-overlay" style={{ backgroundColor: cat.color }}></div>

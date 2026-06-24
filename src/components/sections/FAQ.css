@@ -23,13 +23,6 @@
   transition: all var(--transition-normal);
 }
 
-@media (prefers-color-scheme: dark) {
-  .faq-item {
-    background: rgba(26, 15, 10, 0.4);
-    border-color: rgba(217, 180, 74, 0.15);
-  }
-}
-
 .faq-item:hover {
   transform: translateY(-2px);
   box-shadow: var(--shadow-sm);
@@ -46,17 +39,11 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  font-family: var(--font-display);
+  font-family: var(--font-body);
   font-size: 1.15rem;
   color: var(--color-primary);
   transition: color 0.3s ease;
   font-weight: 500;
-}
-
-@media (prefers-color-scheme: dark) {
-  .faq-question {
-    color: var(--color-text-light);
-  }
 }
 
 .faq-question:hover {

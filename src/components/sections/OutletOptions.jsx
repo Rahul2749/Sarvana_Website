@@ -1,44 +1,57 @@
 import { useRef } from 'react';
 import { useStaggerReveal } from '../../hooks/useGSAPAnimations';
 import SectionTitle from '../ui/SectionTitle';
+import Button from '../ui/Button';
 import './OutletOptions.css';
 
 const options = [
   {
-    title: 'Kiosk / Express',
-    description: 'Perfect for high-footfall areas like malls, airports, and tech parks. Quick service model with a focused menu.',
-    area: '100 - 200 sq.ft',
-    investment: '5 - 8 Lakhs',
-    staff: '2 - 3 Members',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M3 21h18M5 21V8l7-5 7 5v13M9 21v-5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v5" />
-      </svg>
-    )
+    tier: 'STARTER',
+    title: 'Kiosk Model',
+    area: '100–150 sq ft',
+    price: '₹6–9 L',
+    priceDesc: 'est. all-in',
+    features: [
+      'Low investment entry',
+      'Ideal for malls & high streets',
+      'Fast 60-day setup',
+      'Express menu'
+    ],
+    buttonText: 'Enquire Now',
+    variant: 'light',
+    badge: null
   },
   {
-    title: 'Standard Cafe',
-    description: 'A comfortable sit-down space ideal for high streets and neighborhoods. Full menu offering with cozy aesthetics.',
-    area: '300 - 500 sq.ft',
-    investment: '10 - 15 Lakhs',
-    staff: '4 - 6 Members',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8zM6 1v3M10 1v3M14 1v3" />
-      </svg>
-    )
+    tier: 'MOST POPULAR',
+    title: 'Standard Café',
+    area: '250–500 sq ft',
+    price: '₹14–22 L',
+    priceDesc: 'est. all-in',
+    features: [
+      'Full menu service',
+      'Seating for 18–30',
+      'High footfall returns',
+      'Recommended ROI: 12–15 mo'
+    ],
+    buttonText: 'Enquire Now',
+    variant: 'dark',
+    badge: 'MOST POPULAR'
   },
   {
+    tier: 'FLAGSHIP',
     title: 'Premium Lounge',
-    description: 'Our flagship experience. Expansive seating, exclusive menu items, and a premium ambiance for connoisseurs.',
-    area: '800+ sq.ft',
-    investment: '20+ Lakhs',
-    staff: '8+ Members',
-    icon: (
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round">
-        <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7-6.3-4.6-6.3 4.6 2.3-7-6-4.6h7.6z" />
-      </svg>
-    )
+    area: '500+ sq ft',
+    price: '₹28–45 L',
+    priceDesc: 'est. all-in',
+    features: [
+      'Heritage interior design',
+      'Snack + dessert bar',
+      'Highest revenue model',
+      'Brand showcase store'
+    ],
+    buttonText: 'Enquire Now',
+    variant: 'light',
+    badge: null
   }
 ];
 
@@ -46,38 +59,59 @@ const OutletOptions = () => {
   const containerRef = useRef(null);
   useStaggerReveal(containerRef, '.outlet-card');
 
+  // Custom title rendering for italicized green text
+  const customTitle = (
+    <span className="custom-section-title">
+      Three Ways to <em>Open Your Outlet.</em>
+    </span>
+  );
+
   return (
-    <section ref={containerRef} className="outlet-options section">
+    <section ref={containerRef} className="outlet-options section" id="outlet-options">
       <div className="container">
         <SectionTitle 
-          subtitle="Franchise Models"
-          title="Three Ways to Open Your Outlet"
-          description="Choose the model that fits your investment capacity and location strategy."
+          subtitle="FRANCHISE MODELS"
+          title={customTitle}
+          description="Pick the format that fits your city, budget and ambition."
         />
 
         <div className="outlet-grid">
           {options.map((opt, index) => (
-            <div key={index} className="outlet-card">
-              <div className="outlet-icon">
-                {opt.icon}
-              </div>
-              <h3>{opt.title}</h3>
-              <p>{opt.description}</p>
+            <div key={index} className={`outlet-card ${opt.variant}`}>
+              {opt.badge && (
+                <div className="outlet-badge">{opt.badge}</div>
+              )}
               
-              <ul className="outlet-details">
-                <li>
-                  <span>Required Area:</span>
-                  <strong>{opt.area}</strong>
-                </li>
-                <li>
-                  <span>Est. Investment:</span>
-                  <strong>{opt.investment}</strong>
-                </li>
-                <li>
-                  <span>Staff Required:</span>
-                  <strong>{opt.staff}</strong>
-                </li>
+              <div className="outlet-card-header">
+                {!opt.badge && <div className="outlet-tier">{opt.tier}</div>}
+                <h3>{opt.title}</h3>
+                <div className="outlet-area">{opt.area}</div>
+              </div>
+              
+              <div className="outlet-price-section">
+                <span className="outlet-price">{opt.price}</span>
+                <span className="outlet-price-desc">{opt.priceDesc}</span>
+              </div>
+              
+              <ul className="outlet-features">
+                {opt.features.map((feature, idx) => (
+                  <li key={idx}>
+                    <svg viewBox="0 0 24 24" className="check-icon" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                      <polyline points="20 6 9 17 4 12"></polyline>
+                    </svg>
+                    <span>{feature}</span>
+                  </li>
+                ))}
               </ul>
+
+              <div className="outlet-action">
+                <Button 
+                  href="/#contact"
+                  className={`w-full ${opt.variant === 'dark' ? 'btn-gold' : 'btn-dark'}`}
+                >
+                  {opt.buttonText}
+                </Button>
+              </div>
             </div>
           ))}
         </div>

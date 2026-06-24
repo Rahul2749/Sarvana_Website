@@ -7,8 +7,8 @@ const FranchisePage = () => {
   return (
     <div className="page franchise-page" style={{ paddingTop: '80px', backgroundColor: 'var(--color-surface)' }}>
       <Franchise />
-      <ProcessJourney />
       <OutletOptions />
+      <ProcessJourney />
       <InvestmentProcess />
     </div>
   );

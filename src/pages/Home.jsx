@@ -21,8 +21,8 @@ const Home = () => {
       <Hero />
       <HeritageStory />
       <Franchise />
-      <ProcessJourney />
       <OutletOptions />
+      <ProcessJourney />
       <InvestmentProcess />
       <ProductCarousel />
       <Benefits />
