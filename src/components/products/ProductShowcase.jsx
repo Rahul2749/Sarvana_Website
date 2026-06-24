@@ -87,7 +87,7 @@ const TiltCard = ({ product, index, isFeatured }) => {
         {isFeatured && <div className="ps-badge">Bestseller</div>}
         
         <div className="ps-img-box">
-          <img src={product.image} alt={product.name} className="ps-img" />
+          <img src={product.image} alt={product.name} className="ps-img" loading="lazy" decoding="async" />
           {isBeverage && <div className="ps-steam"></div>}
         </div>
 

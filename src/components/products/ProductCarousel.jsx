@@ -49,7 +49,7 @@ const ProductCarousel = () => {
                 </div>
                 <div className="panel-image-container">
                   <div className="panel-image-overlay" style={{ backgroundColor: cat.color }}></div>
-                  <img src={cat.image} alt={cat.title} className="panel-image" />
+                  <img src={cat.image} alt={cat.title} className="panel-image" loading="lazy" decoding="async" />
                 </div>
               </div>
             </div>

@@ -23,8 +23,6 @@ import './App.css';
 gsap.registerPlugin(ScrollTrigger, useGSAP);
 
 const AppContent = () => {
-  const [loading, setLoading] = useState(true);
-  const [contentReady, setContentReady] = useState(false);
   const location = useLocation();
 
   useEffect(() => {
@@ -49,54 +47,31 @@ const AppContent = () => {
 
     gsap.ticker.lagSmoothing(500, 33);
 
-    // Simulate initial loading
-    const timer = setTimeout(() => {
-      setLoading(false);
-    }, 2000);
-
     return () => {
-      clearTimeout(timer);
       lenis.destroy();
       gsap.ticker.remove(lenis.raf);
     };
   }, []);
 
-  // Mount content on next frame after loader finishes to avoid jank
-  useEffect(() => {
-    if (!loading && !contentReady) {
-      requestAnimationFrame(() => {
-        setContentReady(true);
-      });
-    }
-  }, [loading, contentReady]);
-
   return (
-    <>
-      <AnimatePresence>
-        {loading && <Loader onComplete={() => setLoading(false)} />}
-      </AnimatePresence>
-
-      {contentReady && (
-        <div className="app-container">
-          <ScrollToTop />
-          <Navbar />
-          <main className="main-content">
-            <AnimatePresence mode="wait">
-              <PageTransition key={location.pathname}>
-                <Routes location={location} key={location.pathname}>
-                  <Route path="/" element={<Home />} />
-                  <Route path="/products" element={<Products />} />
-                  <Route path="/franchise" element={<FranchisePage />} />
-                  <Route path="/about" element={<About />} />
-                  <Route path="/contact" element={<Contact />} />
-                </Routes>
-              </PageTransition>
-            </AnimatePresence>
-          </main>
-          <Footer />
-        </div>
-      )}
-    </>
+    <div className="app-container">
+      <ScrollToTop />
+      <Navbar />
+      <main className="main-content">
+        <AnimatePresence mode="wait">
+          <PageTransition key={location.pathname}>
+            <Routes location={location} key={location.pathname}>
+              <Route path="/" element={<Home />} />
+              <Route path="/products" element={<Products />} />
+              <Route path="/franchise" element={<FranchisePage />} />
+              <Route path="/about" element={<About />} />
+              <Route path="/contact" element={<Contact />} />
+            </Routes>
+          </PageTransition>
+        </AnimatePresence>
+      </main>
+      <Footer />
+    </div>
   );
 };
 

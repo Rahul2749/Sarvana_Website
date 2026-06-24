@@ -157,7 +157,7 @@ const Benefits = () => {
                     <p className="b-card-desc">{benefit.description}</p>
                     {benefit.featured && (
                       <div className="b-card-featured-image">
-                        <img src="/images/hero/item-jaggery.png" alt="Premium Palm Jaggery" />
+                        <img src="/images/hero/item-jaggery.png" alt="Premium Palm Jaggery" loading="lazy" decoding="async" />
                       </div>
                     )}
                   </div>

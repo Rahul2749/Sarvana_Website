@@ -49,10 +49,10 @@ const QuickContact = () => {
     <section ref={containerRef} id="contact" className="quick-contact section">
       {/* Decorative background items */}
       <div className="section-decor decor-left-bottom" ref={leftDecorRef}>
-        <img src="/images/decor/decor-coffee-cup.png" alt="Coffee" className="floating-img-decor" />
+        <img src="/images/decor/decor-coffee-cup.png" alt="Coffee" className="floating-img-decor" loading="lazy" decoding="async" />
       </div>
       <div className="section-decor decor-right-top" ref={rightDecorRef}>
-        <img src="/images/hero/item-jaggery.png" alt="Jaggery" className="floating-img-decor" />
+        <img src="/images/hero/item-jaggery.png" alt="Jaggery" className="floating-img-decor" loading="lazy" decoding="async" />
       </div>
 
       <div className="container">

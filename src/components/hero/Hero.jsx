@@ -213,11 +213,11 @@ const Hero = () => {
       <div className="hero-beverages">
         <div className="hero-cup hero-cup-tea" ref={teaCupRef}>
           <SteamEffect />
-          <img src="/images/hero/tea-cup.png" alt="Premium Palm Jaggery Tea" />
+          <img src="/images/hero/tea-cup.png" alt="Premium Palm Jaggery Tea" fetchpriority="high" decoding="sync" />
         </div>
         <div className="hero-cup hero-cup-coffee" ref={coffeeCupRef}>
           <SteamEffect />
-          <img src="/images/hero/coffee-cup.png" alt="Premium Palm Jaggery Coffee" />
+          <img src="/images/hero/coffee-cup.png" alt="Premium Palm Jaggery Coffee" fetchpriority="high" decoding="sync" />
         </div>
       </div>
 
@@ -287,7 +287,7 @@ const Hero = () => {
           <div className="hero-logo-glow" />
           <div className="hero-logo-ring" />
           <div className="hero-logo-ring-outer" />
-          <img src="/images/Logo/Sarvana_Logo.png" alt="Sarvana Thati Bellam" className="hero-main-logo" />
+          <img src="/images/Logo/Sarvana_Logo.png" alt="Sarvana Thati Bellam" className="hero-main-logo" fetchpriority="high" decoding="sync" />
         </div>
 
         <div ref={glassPanelRef} className="hero-glass-panel">

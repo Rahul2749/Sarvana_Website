@@ -77,7 +77,7 @@ const BrandStory = () => {
         </svg>
       </div>
       <div className="section-decor decor-right floating-jaggery" ref={jaggeryRef}>
-        <img src="/images/hero/item-jaggery.png" alt="Jaggery" className="floating-img-decor" />
+        <img src="/images/hero/item-jaggery.png" alt="Jaggery" className="floating-img-decor" loading="lazy" decoding="async" />
       </div>
 
       <div className="container">
@@ -121,7 +121,7 @@ const BrandStory = () => {
 
           <div ref={imageRef} className="story-image-container">
             <div className="story-image-wrapper">
-              <img src="/images/hero/story-image.jpg" alt="Traditional Palm Jaggery making process" className="story-image" />
+              <img src="/images/hero/story-image.jpg" alt="Traditional Palm Jaggery making process" className="story-image" loading="lazy" decoding="async" />
               <div className="story-quote">
                 "From the Palmyra tree to your cup, crafted with devotion."
               </div>
