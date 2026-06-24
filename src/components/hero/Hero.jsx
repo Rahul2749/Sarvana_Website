@@ -301,7 +301,7 @@ const Hero = () => {
           <div className="hero-text">
             <h1 className="hero-title">
               <span className="block hero-title-line">
-                {"Start Your Own".split(" ").map((word, i) => (
+                {"Own a Premium".split(" ").map((word, i) => (
                   <span key={`l1-${i}`} className="word-wrapper">
                     <span className="animated-word">{word}&nbsp;</span>
                   </span>
@@ -316,15 +316,8 @@ const Hero = () => {
                 ))}
               </span>
               <span className="block hero-title-line">
-                {"Tea & Coffee".split(" ").map((word, i) => (
+                {"Tea & Coffee Franchise".split(" ").map((word, i) => (
                   <span key={`l3-${i}`} className="word-wrapper">
-                    <span className="animated-word">{word}&nbsp;</span>
-                  </span>
-                ))}
-              </span>
-              <span className="block hero-title-line">
-                {"Franchise".split(" ").map((word, i) => (
-                  <span key={`l4-${i}`} className="word-wrapper">
                     <span className="animated-word">{word}&nbsp;</span>
                   </span>
                 ))}
