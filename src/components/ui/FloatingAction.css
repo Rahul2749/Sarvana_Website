@@ -1,7 +1,7 @@
 .floating-action-container {
   position: fixed;
   bottom: 24px;
-  left: 24px;
+  right: 24px;
   z-index: 1000;
   pointer-events: auto;
 }
@@ -32,7 +32,7 @@
 @media (max-width: 768px) {
   .floating-action-container {
     bottom: 20px;
-    left: 20px;
+    right: 20px;
   }
   
   .floating-action-btn {
