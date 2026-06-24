@@ -410,6 +410,8 @@
 @media (max-width: 768px) {
   .hero-content {
     padding-top: clamp(20px, 5vh, 40px);
+    align-items: center;
+    text-align: center;
   }
 
   .scroll-text {
@@ -460,6 +462,10 @@
 
   .hero-title {
     font-size: clamp(1.8rem, 7vw, 3rem);
+  }
+
+  .hero-buttons {
+    justify-content: center;
   }
 }
 
