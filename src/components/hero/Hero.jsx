@@ -329,8 +329,28 @@ const Hero = () => {
           </div>
 
           <div ref={buttonsRef} className="hero-buttons" style={{ position: 'relative', zIndex: 100, pointerEvents: 'auto' }}>
-            <Button variant="primary" size="lg" href="/franchise">Apply For Franchise &rarr;</Button>
-            <Button variant="secondary" size="lg" href="/products">Explore Products</Button>
+            <Button 
+              variant="primary" 
+              size="lg" 
+              onClick={() => {
+                const el = document.getElementById('franchise');
+                if(el) el.scrollIntoView({ behavior: 'smooth' });
+                else window.location.href = '/franchise';
+              }}
+            >
+              Apply For Franchise &rarr;
+            </Button>
+            <Button 
+              variant="secondary" 
+              size="lg" 
+              onClick={() => {
+                const el = document.getElementById('product-showcase');
+                if(el) el.scrollIntoView({ behavior: 'smooth' });
+                else window.location.href = '/products';
+              }}
+            >
+              Explore Products
+            </Button>
           </div>
         </div>
       </div>
