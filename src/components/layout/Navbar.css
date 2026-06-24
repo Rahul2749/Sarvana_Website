@@ -410,9 +410,11 @@
   font-weight: 400;
   letter-spacing: 1px;
   transition: color var(--transition-fast), transform var(--transition-fast);
-  display: inline-block;
+  display: block;
+  width: 100%;
+  text-align: center;
   position: relative;
-  padding: 0.5rem 0;
+  padding: 12px 20px;
 }
 
 .mobile-link:hover,
@@ -431,23 +433,28 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.25rem;
-  margin-bottom: 0.5rem;
+  margin-top: 0.5rem;
+  margin-bottom: 1rem;
+  width: 100%;
 }
 
 .mobile-sublink {
   font-family: var(--font-body);
   font-size: clamp(1.1rem, 4vw, 1.3rem);
-  color: var(--color-white);
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 400;
-  transition: color 0.2s ease;
+  transition: color 0.2s ease, transform 0.2s ease;
   letter-spacing: 0.5px;
+  display: block;
+  padding: 10px 20px;
+  width: 100%;
+  text-align: center;
 }
 
 .mobile-sublink:hover,
 .mobile-sublink.active {
   color: var(--color-accent);
+  transform: scale(1.05);
 }
 
 .mobile-menu-actions {
