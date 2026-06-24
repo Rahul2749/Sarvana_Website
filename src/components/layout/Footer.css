@@ -8,65 +8,60 @@
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1fr; /* Full width mobile by default */
-  gap: var(--spacing-2xl) var(--spacing-md);
+  grid-template-columns: 1fr 1fr; /* Two columns on mobile for links */
+  gap: var(--spacing-xl) var(--spacing-md);
   margin-bottom: var(--spacing-3xl);
   position: relative;
   z-index: 2;
-  text-align: center; /* Center everything on mobile for a curated look */
+  text-align: left; /* Left align for cleaner look */
+}
+
+.footer-brand {
+  grid-column: span 2;
+  margin-bottom: var(--spacing-md);
+}
+
+.footer-newsletter {
+  grid-column: span 2;
+  margin-top: var(--spacing-md);
 }
 
 .footer-logo {
-  display: inline-block; /* Helps with centering */
-  height: clamp(60px, 15vw, 100px); /* Larger logo */
+  display: inline-block;
+  height: clamp(60px, 15vw, 90px);
   margin-bottom: var(--spacing-md);
 }
 
 .footer-description {
   color: rgba(245, 232, 212, 0.7);
-  margin: 0 auto var(--spacing-lg) auto; /* Center text block */
-  max-width: 300px;
+  margin-bottom: var(--spacing-lg);
+  max-width: 400px;
 }
 
 .social-links {
   display: flex;
   gap: var(--spacing-sm);
-  justify-content: center; /* Center icons */
-}
-
-.footer-brand {
-  grid-column: span 2;
-}
-
-.footer-newsletter {
-  grid-column: span 2;
+  justify-content: flex-start;
 }
 
 @media (min-width: 768px) {
   .footer-grid {
     grid-template-columns: 2fr 1fr 1fr 1.5fr;
     gap: var(--spacing-2xl);
-    text-align: left; /* Back to left-aligned on desktop */
   }
   
   .footer-brand {
     grid-column: span 1;
+    margin-bottom: 0;
   }
   
   .footer-newsletter {
     grid-column: span 1;
+    margin-top: 0;
   }
 
   .footer-logo {
-    height: 60px;
-  }
-
-  .footer-description {
-    margin: 0 0 var(--spacing-lg) 0; /* Un-center text block on desktop */
-  }
-
-  .social-links {
-    justify-content: flex-start; /* Un-center icons on desktop */
+    height: 70px;
   }
 }
 
@@ -126,13 +121,15 @@
   margin: 0;
 }
 
-.footer-links li {
-  margin-bottom: var(--spacing-sm);
-}
-
 .footer-links a {
   color: rgba(245, 232, 212, 0.7);
   transition: color var(--transition-fast);
+  display: block;
+  padding: 6px 0;
+}
+
+.footer-links li {
+  margin-bottom: 0;
 }
 
 .footer-links a:hover {
