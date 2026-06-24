@@ -7,14 +7,14 @@ export const navigationLinks = [
     path: "/#product-showcase", 
     id: "nav-menus",
     submenus: [
-      { label: "Tea", path: "/products?category=Tea", id: "sub-tea" },
-      { label: "Coffee", path: "/products?category=Coffee", id: "sub-coffee" },
-      { label: "Juices", path: "/products?category=Juices", id: "sub-juices" },
-      { label: "Lassi", path: "/products?category=Lassi", id: "sub-lassi" },
-      { label: "Mojitos", path: "/products?category=Mojitos", id: "sub-mojitos" },
-      { label: "Milkshakes", path: "/products?category=Milkshakes", id: "sub-milkshakes" },
-      { label: "Fruit Custard", path: "/products?category=Fruit%20Custard", id: "sub-custard" },
-      { label: "Snacks Mandi", path: "/products?category=Snacks%20Mandi", id: "sub-snacks-mandi" }
+      { label: "Tea", path: "/?category=Tea#product-showcase", id: "sub-tea" },
+      { label: "Coffee", path: "/?category=Coffee#product-showcase", id: "sub-coffee" },
+      { label: "Juices", path: "/?category=Juices#product-showcase", id: "sub-juices" },
+      { label: "Lassi", path: "/?category=Lassi#product-showcase", id: "sub-lassi" },
+      { label: "Mojitos", path: "/?category=Mojitos#product-showcase", id: "sub-mojitos" },
+      { label: "Milkshakes", path: "/?category=Milkshakes#product-showcase", id: "sub-milkshakes" },
+      { label: "Fruit Custard", path: "/?category=Fruit%20Custard#product-showcase", id: "sub-custard" },
+      { label: "Snacks Mandi", path: "/?category=Snacks%20Mandi#product-showcase", id: "sub-snacks-mandi" }
     ]
   },
   { label: "Process", path: "/#process", id: "nav-process" },
